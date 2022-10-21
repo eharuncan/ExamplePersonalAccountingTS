@@ -71,11 +71,15 @@ body {
   height: 100%;
   filter: blur(5px);
 }
-.register-login-page {
-  width: 50%;
-  padding: 8% 0 0;
-  margin: auto;
+.page-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 100px;
 }
+
 
 .form {
   position: relative;
@@ -144,6 +148,23 @@ body {
   font-size: 36px;
   font-weight: 300;
   color: #1a1a1a;
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 80%; 
+  max-width: 480px;
+}
+.data-grid > div {
+margin: 2px;
+background: powderblue;
+padding: 5px;
+}
+.data-grid > div:nth-child(3n+2) {
+background: lemonchiffon;
+}
+.data-grid > div:nth-child(3n+3) {
+background: palegreen;
 }
 
 .footer {
