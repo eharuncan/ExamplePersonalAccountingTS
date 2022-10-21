@@ -1,7 +1,14 @@
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  top: 0;
+  left: 0;
+  position: relative;
+}
+
+html {
+  width: 100%;
+  height: 100%;
 }
 
 body {
@@ -12,98 +19,17 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.middle-section {
-  position: relative;
-  width: 100%;
-  padding: 0.7rem 2rem;
-}
-
-.middle-section-text {
-  font-size: 1.2rem;
-  text-transform: lowercase;
-}
-
-.middle-section a img {
-  height: 1.7rem;
-}
-
-.learn-ts-container {
-  width: 50%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.counter-example {
-  width: 50%;
-  font-family: monospace;
-  font-size: 1.4rem;
-}
-
-#increment,
-#decrement {
-  padding: 0.4rem;
-  font-size: 1.2rem;
-  background-color: #aca8a823;
-  border: none;
-  outline: none;
-}
-
-#increment:hover,
-#decrement:hover {
-  background-color: #262626;
-  color: #f5f5f5;
-}
-
-.learn-ts-text {
-  color: #111111;
-  font-size: 2rem;
-}
-
-.learn-ts-container a {
-  text-decoration: none;
-}
-
-.button {
-  cursor: pointer;
-  background-color: #3178c6;
-  border: none;
-  outline: none;
-  color: #f5f5f5;
-  display: flex;
-  font-size: 1.2rem;
-  text-transform: capitalize;
-  padding: 0.5rem 1rem;
-}
-
-.button:hover {
-  background-color: #262626;
-}
-
-.flex {
-  display: flex;
-  gap: 10px;
-}
-
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .navbar {
-  overflow: hidden;
-  background-color: #333;
   position: fixed;
-  top: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #333;
   width: 100%;
   height: 50px;
+  z-index: 1;
 }
 
 .navbar a {
-  float: left;
   display: block;
   color: #f2f2f2;
   text-align: center;
@@ -117,9 +43,42 @@ body {
   color: black;
 }
 
+.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  margin-top: 50px;
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: rgb(255, 255, 255);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+#login-bg {
+  background-image: url('/public/assets/background.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  margin-top: -50px;
+  filter: blur(5px);
+}
+
 .footer {
   padding-top: 50px;
   text-align: center;
 }
-
 

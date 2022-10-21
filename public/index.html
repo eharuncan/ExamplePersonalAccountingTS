@@ -16,23 +16,40 @@
 <body>
   <header class="header">
     <div class="navbar">
-      <a href="#home">Harcamalarım</a>
-      <a href="#news">Kategorilerim</a>
+      <div class="dropdown">
+        <a href="#home" class="dropbtn">Harcamalarım</a>
+        <div class="dropdown-content">
+          <a href="#home">Göster</a>
+          <a href="#home">Ekle</a>
+          <a href="#home">Düzenle</a>
+          <a href="#home">Sil</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#home" class="dropbtn">Kategorilerim</a>
+        <div class="dropdown-content">
+          <a href="#home">Göster</a>
+          <a href="#home">Ekle</a>
+          <a href="#home">Düzenle</a>
+          <a href="#home">Sil</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#home" class="dropbtn">Profilim</a>
+        <div class="dropdown-content">
+          <a href="#home">Göster</a>
+          <a href="#home">Düzenle</a>
+        </div>
+      </div>
       <a href="#home">Giriş Yap</a>
       <a href="#home">Kaydol</a>
       <a href="#contact">Oturumu Kapat</a>
     </div>
   </header>
-  <section class="middle-section flex-center">
-    <div class="learn-ts-container">
-      <div class="counter-example flex flex-center">
-        Count: <span id="count-value">0</span><button id="increment">+</button> <button id="decrement">-</button>
-      </div>
-      <span class="learn-ts-text"> New to Typescript? </span>
-      <a href="https://www.typescriptlang.org/" target="_blank">
-        <button class="button">Kaydol</button></a>
-    </div>
-  </section>
+
+  <div id="login-bg"></div>
+
+
   <footer class="footer">
     2022 Şahsi Muhasebem
   </footer>
