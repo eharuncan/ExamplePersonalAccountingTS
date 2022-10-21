@@ -86,9 +86,9 @@ body {
   height: 100%;
   padding-top: 50px;
 }
-.page-manu {
-  position: absolute;
-  padding-top: 50px;
+.page-menu {
+  position: relative;
+  padding-top: auto;
 }
 
 .container {
@@ -149,6 +149,7 @@ body {
 }
 
 .button {
+  text-decoration: none;
   text-transform: uppercase;
   outline: 0;
   width: auto;
