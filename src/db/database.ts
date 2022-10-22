@@ -30,32 +30,43 @@ export class Database {
     }
 
     get userList(): Array<User> {
-        if (Database.connectStatus)
+        if (Database.connectStatus){
+            console.log("user list geldi.");
             return Database.userList;
-        return null as any;
+        }else{
+            console.log("user list gelmedi.");
+            return null as any;
+        }
     }
     set userList(userList: Array<User>) {
-        if (Database.connectStatus)
-        Database.userList = userList;
+        if (Database.connectStatus){
+            Database.userList = userList;
+        }
     }
 
     get expenseList(): Array<Expense> {
-        if (Database.connectStatus)
+        if (Database.connectStatus){
             return Database.expenseList;
-        return null as any;
+        }else{
+            return null as any;
+        }
     }
     set expenseList(expenseList: Array<Expense>) {
-        if (Database.connectStatus)
-        Database.expenseList = expenseList;
+        if (Database.connectStatus){
+            Database.expenseList = expenseList;
+        }
     }
 
     get expenseCategoryList(): Array<ExpenseCategory> {
-        if (Database.connectStatus)
+        if (Database.connectStatus){
             return Database.expenseCategoryList;
-        return null as any;
+        }else{
+            return null as any;
+        }
     }
     set expenseCategoryList(expenseCategoryList: Array<ExpenseCategory>) {
-        if (Database.connectStatus)
-        Database.expenseCategoryList = expenseCategoryList;
+        if (Database.connectStatus){
+            Database.expenseCategoryList = expenseCategoryList;
+        }
     }
 }

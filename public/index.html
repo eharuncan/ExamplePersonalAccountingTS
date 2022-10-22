@@ -64,7 +64,7 @@
             <input type="text" name="userEmail" placeholder="Eposta adresiniz" />
             <input type="password" name="userPassword" placeholder="Şifreniz" />
             <input type="password" name="userRetypedPassword" placeholder="Şifrenizi tekrar giriniz" />
-            <input type="submit" value="Kaydol" href="#show-expenses-page" class="button button-green"/>
+            <input type="submit" value="Kaydol" class="button button-green"/>
             <p class="message">Kayıtlı mısın? <a href="#login-page">Oturum Aç</a></p>
           </form>
         </div>
@@ -77,10 +77,10 @@
     <div class="page-content">
       <div class="input-page">
         <div class="form">
-          <form>
-            <input type="text" placeholder="Eposta adresiniz" />
-            <input type="password" placeholder="Şifreniz" />
-            <a href="#show-expenses-page" class="button button-green">Oturum Aç</a>
+          <form id="login-form">
+            <input type="text" name="userEmail" placeholder="Eposta adresiniz" />
+            <input type="password" name="userPassword" placeholder="Şifreniz" />
+            <input type="submit" value="Oturum Aç" class="button button-green"/>
             <p class="message">Kayıtlı değil misin? <a href="#register-page">Hesap Oluştur</a></p>
           </form>
         </div>

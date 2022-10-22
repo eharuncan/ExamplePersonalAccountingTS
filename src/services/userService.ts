@@ -35,7 +35,7 @@ export class UserService {
     public register(name: string, surname: string, email: string, password: string, retypedPassword: string): boolean {
 
         if(!this.checkPasswords(password, retypedPassword)){
-            console.log("Hata: Şifreler Uyuşmuyor");
+            console.log("Hata: Şifreler uyuşmuyor.");
             return false;
         }
         let newUserId;
@@ -111,6 +111,7 @@ export class UserService {
     public checkUser(email: string, password: string): boolean {
         const resultList = this.userListDB
             .filter((user) => { user.email === email && user.password === password });
+            console.log(resultList);
         if (resultList.length === 0) {
             return false;
         } else {
