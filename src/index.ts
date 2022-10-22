@@ -26,10 +26,6 @@ import { ExpenseCategoryService } from "./services/expenseCategoryService";
 import { UserService } from "./services/userService";
 import { ExpenseService } from "./services/expenseService";
 
-import { ExpenseCategory } from "./domain/expenseCategory";
-import { User } from "./domain/user";
-import { Expense } from "./domain/expense";
-
 export let expenseCategoryService: ExpenseCategoryService;
 export let userService: UserService;
 export let expenseService: ExpenseService;
@@ -39,23 +35,23 @@ let database = connectDatabase();
 if (database == null) {
   console.log("Hata: Database'e bağlanılamadı.");
 }
-else{
+else {
   console.log("Database'e başarıyla bağlandı.");
 }
 startServices(database);
 
-function connectDatabase():Database{
+function connectDatabase(): Database {
   let username = "admin";
   let password = "admin";
-  if(Database.connect(username, password)){
-      return new Database();
-  }else {
-      return null as any;
+  if (Database.connect(username, password)) {
+    return new Database();
+  } else {
+    return null as any;
   }
 }
 
-function startServices(database: Database){
-  expenseCategoryService  = new ExpenseCategoryService(database.expenseCategoryList);
+function startServices(database: Database) {
+  expenseCategoryService = new ExpenseCategoryService(database.expenseCategoryList);
   userService = new UserService(database.userList);
   expenseService = new ExpenseService(database.expenseList);
 }
@@ -72,14 +68,18 @@ if (registerForm != null) {
     const userPassword = formData.get("userPassword") as string;
     const userRetypedPassword = formData.get("userRetypedPassword") as string;
 
-    userService.register(userName, userSurname, userEmail, userPassword, userRetypedPassword);
+    if (userService.register(userName, userSurname, userEmail, userPassword, userRetypedPassword)) {
+      console.log("Kayıt İşlemi Başarılı");
+      let currentUser = userService.currentUser;
+      console.log(currentUser.name);
+      console.log(currentUser.surname);
+      console.log(currentUser.email);
+      console.log(currentUser.password);
+    } else {
+      console.log("Hata: Kayıt İşlemi Başarısız");
+    }
 
-    let currentUser = userService.currentUser;
 
-    console.log(currentUser.name);
-    console.log(currentUser.surname);
-    console.log(currentUser.email);
-    console.log(currentUser.password);
 
     return false; // prevent reload
   };

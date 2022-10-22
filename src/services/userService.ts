@@ -20,51 +20,56 @@ export class UserService {
         return this.userListDB;
     }
 
-    public getUserById(userId: number):User {
+    public getUserById(userId: number): User {
         const resultList = this.userListDB
-                .filter((user) => {user.id === userId});
+            .filter((user) => { user.id === userId });
         return resultList[0];
     }
 
     public getUserByEmailAndPassword(email: string, password: string): User {
         const resultList = this.userListDB
-                .filter((user) => {user.email === email && user.password === password});
+            .filter((user) => { user.email === email && user.password === password });
         return resultList[0];
     }
 
     public register(name: string, surname: string, email: string, password: string, retypedPassword: string): boolean {
-            let newUserId;
-            let userList = this.userListDB;
-            if (userList.length == 0) {
-                newUserId = 1;
-            } else {
-                let lastUser = userList[userList.length - 1];
-                newUserId = lastUser.id + 1;
-            }
 
-            if (!expenseCategoryService.addDefaultExpenseCategories(newUserId)) {
-                return false;
-            }
+        if(!this.checkPasswords(password, retypedPassword)){
+            console.log("Hata: Şifreler Uyuşmuyor");
+            return false;
+        }
+        let newUserId;
+        let userList = this.userListDB;
+        if (userList.length == 0) {
+            newUserId = 1;
+        } else {
+            let lastUser = userList[userList.length - 1];
+            newUserId = lastUser.id + 1;
+        }
 
-            let selectedUserType;
-            if (name =="admin") {
-                selectedUserType = UserTypes.ADMIN;
-            }else{
-                selectedUserType = UserTypes.CUSTOMER;
-            }
+        if (!expenseCategoryService.addDefaultExpenseCategories(newUserId)) {
+            return false;
+        }
 
-            let user = new User(newUserId, selectedUserType, name, surname, email, password)
+        let selectedUserType;
+        if (name == "admin") {
+            selectedUserType = UserTypes.ADMIN;
+        } else {
+            selectedUserType = UserTypes.CUSTOMER;
+        }
 
-            this.userListDB.push(user);
-            this.currentUser = user;
-            return true;
+        let user = new User(newUserId, selectedUserType, name, surname, email, password)
+
+        this.userListDB.push(user);
+        this.currentUser = user;
+        return true;
 
     }
 
     public editUser(user: User, editedUser: User): boolean {
-            let index = this.getUsers().indexOf(user);
-            this.userListDB[index] = editedUser;
-            return true;
+        let index = this.getUsers().indexOf(user);
+        this.userListDB[index] = editedUser;
+        return true;
     }
 
     public deleteUser(userId: number): boolean {
@@ -95,12 +100,20 @@ export class UserService {
         return true;
     }
 
+    public checkPasswords(password1: string, password2: string): boolean {
+        if (password1 === password2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public checkUser(email: string, password: string): boolean {
         const resultList = this.userListDB
-                .filter((user) => {user.email === email && user.password === password});
+            .filter((user) => { user.email === email && user.password === password });
         if (resultList.length === 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
