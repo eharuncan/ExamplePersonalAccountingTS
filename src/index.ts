@@ -26,6 +26,10 @@ import { ExpenseCategoryService } from "./services/expenseCategoryService";
 import { UserService } from "./services/userService";
 import { ExpenseService } from "./services/expenseService";
 
+import { ExpenseCategory } from "./domain/expenseCategory";
+import { User } from "./domain/user";
+import { Expense } from "./domain/expense";
+
 export let expenseCategoryService: ExpenseCategoryService;
 export let userService: UserService;
 export let expenseService: ExpenseService;
@@ -76,7 +80,6 @@ if (registerForm != null) {
     console.log(currentUser.surname);
     console.log(currentUser.email);
     console.log(currentUser.password);
-    
 
     return false; // prevent reload
   };

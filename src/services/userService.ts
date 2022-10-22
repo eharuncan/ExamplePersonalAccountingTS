@@ -47,27 +47,24 @@ export class UserService {
             }
 
             let selectedUserType;
-            if(name == "admin"){
+            if (name =="admin") {
                 selectedUserType = UserTypes.ADMIN;
             }else{
                 selectedUserType = UserTypes.CUSTOMER;
             }
 
-            let user = new User(newUserId, selectedUserType, name, surname, email, password )
+            let user = new User(newUserId, selectedUserType, name, surname, email, password)
 
             this.userListDB.push(user);
             this.currentUser = user;
             return true;
+
     }
 
     public editUser(user: User, editedUser: User): boolean {
-        if (this.validateUser(editedUser)) {
             let index = this.getUsers().indexOf(user);
             this.userListDB[index] = editedUser;
             return true;
-        } else {
-            return false;
-        }
     }
 
     public deleteUser(userId: number): boolean {
@@ -96,13 +93,6 @@ export class UserService {
         // Burada user adına tutulan oturum açma bilgileri silinir.
         this.currentUser = null as any;
         return true;
-    }
-
-    public validateUser(user: User): boolean {
-
-        //todo: burası yazılacak
-        return true;
-
     }
 
     public checkUser(email: string, password: string): boolean {
