@@ -19,6 +19,7 @@
     "webpack-cli": "^4.8.0"
   },
   "devDependencies": {
+    "moment": "^2.29.4",
     "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",

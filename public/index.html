@@ -53,31 +53,31 @@
     </div>
   </div>
 
-  <div id="register-page" class="page">
+  <section id="register-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/register-bg.jpg');"></div>
     <div class="page-content">
       <div class="input-page">
         <div class="form">
-          <form class="register-form">
-            <input type="text" placeholder="Adınız" />
-            <input type="text" placeholder="Soyadınız" />
-            <input type="text" placeholder="Eposta adresiniz" />
-            <input type="password" placeholder="Şifreniz" />
-            <input type="password" placeholder="Şifrenizi tekrar giriniz" />
-            <a href="#show-expenses-page" class="button button-green">Kaydol</a>
+          <form id="register-form">
+            <input type="text" name="userName" placeholder="Adınız" />
+            <input type="text" name="userSurname" placeholder="Soyadınız" />
+            <input type="text" name="userEmail" placeholder="Eposta adresiniz" />
+            <input type="password" name="userPassword" placeholder="Şifreniz" />
+            <input type="password" name="userRetypedPassword" placeholder="Şifrenizi tekrar giriniz" />
+            <input type="submit" value="Kaydol" href="#show-expenses-page" class="button button-green"/>
             <p class="message">Kayıtlı mısın? <a href="#login-page">Oturum Aç</a></p>
           </form>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="login-page" class="page">
+  <section id="login-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/expenses-bg.jpg');"></div>
     <div class="page-content">
       <div class="input-page">
         <div class="form">
-          <form class="login-form">
+          <form>
             <input type="text" placeholder="Eposta adresiniz" />
             <input type="password" placeholder="Şifreniz" />
             <a href="#show-expenses-page" class="button button-green">Oturum Aç</a>
@@ -86,9 +86,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="show-expenses-page" class="page">
+  <section id="show-expenses-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/expenses-bg.jpg');"></div>
     <div class="page-content">
       <div class="data-grid-5-column">
@@ -119,9 +119,9 @@
         <a href="#delete-expense-page" class="button button-red">Sil</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="add-expense-page" class="page">
+  <section id="add-expense-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/expenses-bg.jpg');"></div>
     <div class="page-content">
       <div class="input-page">
@@ -136,9 +136,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="edit-expense-page" class="page">
+  <section id="edit-expense-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/expenses-bg.jpg');"></div>
     <div class="page-content">
       <div class="data-grid-5-column">
@@ -149,7 +149,6 @@
         <div>Tarihi</div>
         <div>Kategorisi</div>
 
-        
         <div>1</div>
         <div>Harcama 1</div>
         <div>100</div>
@@ -175,9 +174,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="delete-expense-page" class="page">
+  <section id="delete-expense-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/expenses-bg.jpg');"></div>
     <div class="page-content">
       <div class="data-grid-5-column">
@@ -188,7 +187,6 @@
         <div>Tarihi</div>
         <div>Kategorisi</div>
 
-        
         <div>1</div>
         <div>Harcama 1</div>
         <div>100</div>
@@ -211,9 +209,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="show-categories-page" class="page">
+  <section id="show-categories-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/categories-bg.jpg');"></div>
     <div class="page-content">
       <div class="data-grid-2-column">
@@ -234,9 +232,9 @@
         <a href="#delete-category-page" class="button button-red">Sil</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="add-category-page" class="page">
+  <section id="add-category-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/categories-bg.jpg');"></div>
     <div class="page-content">
       <div class="input-page">
@@ -248,9 +246,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="edit-category-page" class="page">
+  <section id="edit-category-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/categories-bg.jpg');"></div>
     <div class="page-content">
       <div class="data-grid-2-column">
@@ -274,9 +272,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="delete-category-page" class="page">
+  <section id="delete-category-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/categories-bg.jpg');"></div>
     <div class="page-content">
       <div class="data-grid-2-column">
@@ -300,9 +298,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="show-profile-page" class="page">
+  <section id="show-profile-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/profile-bg.jpg');"></div>
     <div class="page-content">
       <div class="data-grid-2-column-reverse">
@@ -321,9 +319,9 @@
         <a href="#edit-profile-page" class="button button-yellow">Profilini Düzenle</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="edit-profile-page" class="page">
+  <section id="edit-profile-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/profile-bg.jpg');"></div>
     <div class="page-content">
       <div class="data-grid-2-column-reverse">
@@ -342,7 +340,7 @@
         <a href="#show-profile-page" class="button button-green">Kaydet</a>
       </div>
     </div>
-  </div>
+  </section>
 
 
   <footer class="footer">2022 Şahsi Muhasebem</footer>
