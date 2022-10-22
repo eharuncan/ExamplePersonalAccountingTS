@@ -13,13 +13,13 @@ export class ExpenseCategoryService {
     }
 
     public getExpenseCategoriesByUserId(userId: number): Array<ExpenseCategory> {
-        const resultList = this.expenseCategoryListDB
+        let resultList = this.expenseCategoryListDB
                 .filter((expenseCategory) => {expenseCategory.userId === userId});
         return resultList;
     }
 
     public getExpenseCategoryByUserIdAndExpenseCategoryId(userId: number, expenseCategoryId: number): ExpenseCategory {
-        const resultList = this.expenseCategoryListDB
+        let resultList = this.expenseCategoryListDB
                 .filter((expenseCategory) => {expenseCategory.userId === userId && expenseCategory.id === expenseCategoryId});
         return resultList[0];
     }
@@ -51,7 +51,7 @@ export class ExpenseCategoryService {
 
     public deleteExpenseCategory(userId: number, expenseCategoryId: number): boolean {
         let foundExpenseCategory = this.getExpenseCategoryByUserIdAndExpenseCategoryId(userId, expenseCategoryId);
-        const index = this.expenseCategoryListDB.indexOf(foundExpenseCategory, 0);
+        let index = this.expenseCategoryListDB.indexOf(foundExpenseCategory, 0);
         if (index > -1) {
             this.expenseCategoryListDB.splice(index, 1);
         }

@@ -21,14 +21,15 @@ export class UserService {
     }
 
     public getUserById(userId: number): User {
-        const resultList = this.userListDB
+        let resultList = this.userListDB
             .filter((user) => { user.id === userId });
         return resultList[0];
     }
 
     public getUserByEmailAndPassword(email: string, password: string): User {
-        const resultList = this.userListDB
+        let resultList = this.userListDB
             .filter((user) => { user.email === email && user.password === password });
+            console.log(resultList);
         return resultList[0];
     }
 
@@ -77,7 +78,7 @@ export class UserService {
             return false;
         } else {
             let foundUser = this.getUserById(userId);
-            const index = this.userListDB.indexOf(foundUser, 0);
+            let index = this.userListDB.indexOf(foundUser, 0);
             if (index > -1) {
                 this.userListDB.splice(index, 1);
             }
@@ -109,9 +110,8 @@ export class UserService {
     }
 
     public checkUser(email: string, password: string): boolean {
-        const resultList = this.userListDB
-            .filter((user) => { user.email === email && user.password === password });
-            console.log(resultList);
+        let resultList = this.userListDB
+            .filter((user) => { user.email == email && user.password == password });
         if (resultList.length === 0) {
             return false;
         } else {
