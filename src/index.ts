@@ -59,11 +59,14 @@ const registerButton = <HTMLButtonElement>document.querySelector("#register-butt
 const loginButton = <HTMLButtonElement>document.querySelector("#login-button");
 const logoutButton = <HTMLButtonElement>document.querySelector("#logout-button");
 const showProfileButton = <HTMLButtonElement>document.querySelector("#show-profile-button");
-const editProfileButton = <HTMLButtonElement>document.querySelector(".edit-profile-button");
+const editProfileButton = <HTMLButtonElement>document.querySelector("#edit-profile-button");
+const editProfileButton2 = <HTMLButtonElement>document.querySelector("#edit-profile-button2");
 const editProfileSaveButton = <HTMLButtonElement>document.querySelector("#edit-profile-save-button");
 
 function refreshMenus() {
   const mainMenu = <HTMLDivElement>document.querySelector("#main-menu");
+  const addUserMenu = <HTMLDivElement>document.querySelector("#add-user-menu");
+  const deleteUserMenu = <HTMLDivElement>document.querySelector("#delete-user-menu");
   const expensesMenu = <HTMLDivElement>document.querySelector("#expenses-menu");
   const categoriesMenu = <HTMLDivElement>document.querySelector("#categories-menu");
   const registerMenu = <HTMLDivElement>document.querySelector("#register-menu");
@@ -71,19 +74,28 @@ function refreshMenus() {
   const profileMenu = <HTMLDivElement>document.querySelector("#profile-menu");
   const logoutMenu = <HTMLDivElement>document.querySelector("#logout-menu");
   if (userService.currentUser == null) {
+    mainMenu.setAttribute("style", "display: block;");
+    loginMenu.setAttribute("style", "display: block;");
+    registerMenu.setAttribute("style", "display: block;");
+
+    addUserMenu.setAttribute("style", "display: none;");
+    deleteUserMenu.setAttribute("style", "display: none;");
     expensesMenu.setAttribute("style", "display: none;");
     categoriesMenu.setAttribute("style", "display: none;");
-    logoutMenu.setAttribute("style", "display: none;");
     profileMenu.setAttribute("style", "display: none;");
-    mainMenu.setAttribute("style", "display: block;");
-    registerMenu.setAttribute("style", "display: block;");
-    loginMenu.setAttribute("style", "display: block;");
+    logoutMenu.setAttribute("style", "display: none;");
   } else {
+    if(userService.currentUser.type == "ADMIN"){
+      addUserMenu.setAttribute("style", "display: block;");
+      deleteUserMenu.setAttribute("style", "display: block;");
+    }else{
+      expensesMenu.setAttribute("style", "display: block;");
+      categoriesMenu.setAttribute("style", "display: block;");
+    }
     mainMenu.setAttribute("style", "display: none;");
-    registerMenu.setAttribute("style", "display: none;");
     loginMenu.setAttribute("style", "display: none;");
-    expensesMenu.setAttribute("style", "display: block;");
-    categoriesMenu.setAttribute("style", "display: block;");
+    registerMenu.setAttribute("style", "display: none;");
+
     logoutMenu.setAttribute("style", "display: block;");
     logoutButton.innerText = "Oturumu Kapat (" + userService.currentUser.name + ")"
     profileMenu.setAttribute("style", "display: block;");
@@ -159,6 +171,7 @@ const handleShowProfileClick = () => {
 showProfileButton.addEventListener("click", handleShowProfileClick);
 
 const handleEditProfileClick = () => {
+  window.location.replace("#edit-profile-page");
   const editProfileName = <HTMLInputElement>document.querySelector("#edit-profile-name");
   const editProfileSurname = <HTMLInputElement>document.querySelector("#edit-profile-surname");
   const editProfileEmail = <HTMLInputElement>document.querySelector("#edit-profile-email");
@@ -167,6 +180,7 @@ const handleEditProfileClick = () => {
   editProfileEmail.setAttribute("placeholder", userService.currentUser.email);
 }
 editProfileButton.addEventListener("click", handleEditProfileClick);
+editProfileButton2.addEventListener("click", handleEditProfileClick);
 
 const handleEditProfileSaveClick = () => {
   const editProfileForm = document.getElementById("edit-profile-form");

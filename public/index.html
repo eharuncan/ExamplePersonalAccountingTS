@@ -19,6 +19,12 @@
       <div id="main-menu">
         <a href="#main-page">Anasayfa</a>
       </div>
+      <div id="add-user-menu">
+        <a href="#add-user-page">Kullanıcı Ekle</a>
+      </div>
+      <div id="delete-user-menu">
+        <a href="#delete-user-page">Kullanıcı Sil</a>
+      </div>
       <div id="expenses-menu" class="dropdown">
         <a class="dropbtn" href="#show-expenses-page">Harcamalarım</a>
         <div class="dropdown-content">
@@ -44,7 +50,7 @@
       <div id="profile-menu" class="dropdown">
         <a id="show-profile-button" class="dropbtn" href="#show-profile-page">Profilim</a>
         <div class="dropdown-content">
-          <a class="edit-profile-button" href="#edit-profile-page">Düzenle</a>
+          <a id="edit-profile-button" href="#edit-profile-page">Düzenle</a>
         </div>
       </div>
       <div id="logout-menu">
@@ -53,25 +59,39 @@
     </div>
   </header>
 
-  <div id="main-page" class="page">
+  <section id="main-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/main-bg.jpg');"></div>
     <div class="page-content">
       <h3 class="animate-character"> HOŞGELDİNİZ</h3>
       <a class="button button-green" href="#register-page">Şimdi Kaydolun!</a>
     </div>
-  </div>
+  </section>
+
+  <section id="add-user-page" class="page">
+    <div class="page-background" style="background-image: url('/public/assets/users-bg.jpg');"></div>
+    <div class="page-content">
+     
+    </div>
+  </section>
+
+  <section id="delete-user-page" class="page">
+    <div class="page-background" style="background-image: url('/public/assets/users-bg.jpg');"></div>
+    <div class="page-content">
+     
+    </div>
+  </section>
 
   <section id="register-page" class="page">
-    <div class="page-background" style="background-image: url('/public/assets/register-bg.jpg');"></div>
+    <div class="page-background" style="background-image: url('/public/assets/expenses-bg.jpg');"></div>
     <div class="page-content">
       <div class="input-page">
         <div class="form">
           <form id="register-form">
-            <input type="text" name="register-name" placeholder="Adınız" />
-            <input type="text" name="register-surname" placeholder="Soyadınız" />
-            <input type="text" name="register-email" placeholder="Eposta adresiniz" />
-            <input type="password" name="register-password" placeholder="Şifreniz" />
-            <input type="password" name="register-retyped-password" placeholder="Şifrenizi tekrar giriniz" />
+            <input name="register-name" type="text" placeholder="Adınız" />
+            <input name="register-surname" type="text" placeholder="Soyadınız" />
+            <input name="register-email" type="text" placeholder="Eposta adresiniz" />
+            <input name="register-password" type="password" placeholder="Şifreniz" />
+            <input name="register-retyped-password" type="password" placeholder="Şifrenizi tekrar giriniz" />
             <input id="register-button" class="button button-green" type="submit" value="Kaydol" />
             <p class="message">Kayıtlı mısın? <a href="#login-page">Oturum Aç</a></p>
           </form>
@@ -86,8 +106,8 @@
       <div class="input-page">
         <div class="form">
           <form id="login-form">
-            <input type="text" name="login-email" placeholder="Eposta adresiniz" />
-            <input type="password" name="login-password" placeholder="Şifreniz" />
+            <input name="login-email" type="text" placeholder="Eposta adresiniz" />
+            <input name="login-password" type="password" placeholder="Şifreniz" />
             <input id="login-button" class="button button-green" type="submit" value="Oturum Aç" />
             <p class="message">Kayıtlı değil misin? <a href="#register-page">Hesap Oluştur</a></p>
           </form>
@@ -134,12 +154,12 @@
     <div class="page-content">
       <div class="input-page">
         <div class="form">
-          <form class="login-form">
-            <input type="text" placeholder="Harcama adı" />
-            <input type="text" placeholder="Miktarı" />
-            <input type="text" placeholder="Tarihi" />
-            <input type="text" placeholder="Kategori" />
-            <a class="button button-green" href="#show-expenses-page">Kaydet</a>
+          <form id="add-expense-form">
+            <input name ="add-expense-name" type="text" placeholder="Harcama adı" />
+            <input name ="add-expense-amount" type="text" placeholder="Miktarı" />
+            <input name ="add-expense-date" type="text" placeholder="Tarihi" />
+            <input name ="add-expense-category" type="text" placeholder="Kategori" />
+            <input id="add-expense-save-button" class="button button-green" type="submit" value="Kaydet" />
           </form>
         </div>
       </div>
@@ -324,7 +344,7 @@
 
       </div>
       <div class="page-menu">
-        <a class="edit-profile-button button button-yellow" href="#edit-profile-page">Profilini Düzenle</a>
+        <a id="edit-profile-button2" class="button button-yellow" href="#edit-profile-page">Profilini Düzenle</a>
       </div>
     </div>
   </section>
@@ -342,22 +362,22 @@
           <div><input id="edit-profile-surname" type="text" name="edit-profile-surname" placeholder="Can" /></div>
 
           <div>Eposta Adresiniz:</div>
-          <div><input id="edit-profile-email" type="text" name="edit-profile-email" placeholder="eharuncan@gmail.com" /></div>
+          <div><input id="edit-profile-email" type="text" name="edit-profile-email" placeholder="eharuncan@gmail.com" />
+          </div>
 
           <div>Yeni Şifreniz:</div>
-          <div><input type="password" name="edit-profile-password"/></div>
+          <div><input type="password" name="edit-profile-password" /></div>
 
           <div>Yeni Şifreniz (tekrar):</div>
-          <div><input type="password" name="edit-profile-retyped-password"/></div>
+          <div><input type="password" name="edit-profile-retyped-password" /></div>
 
         </div>
-      <div class="page-menu">
-        <input id="edit-profile-save-button" class="button button-green" type="submit" value="Kaydet" />
-      </div>
-    </form>
+        <div class="page-menu">
+          <input id="edit-profile-save-button" class="button button-green" type="submit" value="Kaydet" />
+        </div>
+      </form>
     </div>
   </section>
-
 
   <footer class="footer">2022 Şahsi Muhasebem</footer>
 </body>
