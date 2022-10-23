@@ -42,9 +42,9 @@
         <a href="#register-page">Kaydol</a>
       </div>
       <div id="profile-menu" class="dropdown">
-        <a id="profile-button" class="dropbtn" href="#show-profile-page">Profilim</a>
+        <a id="show-profile-button" class="dropbtn" href="#show-profile-page">Profilim</a>
         <div class="dropdown-content">
-          <a href="#edit-profile-page">Düzenle</a>
+          <a class="edit-profile-button" href="#edit-profile-page">Düzenle</a>
         </div>
       </div>
       <div id="logout-menu">
@@ -67,11 +67,11 @@
       <div class="input-page">
         <div class="form">
           <form id="register-form">
-            <input type="text" name="userName" placeholder="Adınız" />
-            <input type="text" name="userSurname" placeholder="Soyadınız" />
-            <input type="text" name="userEmail" placeholder="Eposta adresiniz" />
-            <input type="password" name="userPassword" placeholder="Şifreniz" />
-            <input type="password" name="userRetypedPassword" placeholder="Şifrenizi tekrar giriniz" />
+            <input type="text" name="register-name" placeholder="Adınız" />
+            <input type="text" name="register-surname" placeholder="Soyadınız" />
+            <input type="text" name="register-email" placeholder="Eposta adresiniz" />
+            <input type="password" name="register-password" placeholder="Şifreniz" />
+            <input type="password" name="register-retyped-password" placeholder="Şifrenizi tekrar giriniz" />
             <input id="register-button" class="button button-green" type="submit" value="Kaydol" />
             <p class="message">Kayıtlı mısın? <a href="#login-page">Oturum Aç</a></p>
           </form>
@@ -86,8 +86,8 @@
       <div class="input-page">
         <div class="form">
           <form id="login-form">
-            <input type="text" name="userEmail" placeholder="Eposta adresiniz" />
-            <input type="password" name="userPassword" placeholder="Şifreniz" />
+            <input type="text" name="login-email" placeholder="Eposta adresiniz" />
+            <input type="password" name="login-password" placeholder="Şifreniz" />
             <input id="login-button" class="button button-green" type="submit" value="Oturum Aç" />
             <p class="message">Kayıtlı değil misin? <a href="#register-page">Hesap Oluştur</a></p>
           </form>
@@ -324,7 +324,7 @@
 
       </div>
       <div class="page-menu">
-        <a class="button button-yellow" href="#edit-profile-page">Profilini Düzenle</a>
+        <a class="edit-profile-button button button-yellow" href="#edit-profile-page">Profilini Düzenle</a>
       </div>
     </div>
   </section>
@@ -332,21 +332,29 @@
   <section id="edit-profile-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/profile-bg.jpg');"></div>
     <div class="page-content">
-      <div class="data-grid-2-column-reverse">
+      <form id="edit-profile-form">
+        <div class="data-grid-2-column-reverse">
 
-        <div>Adınız:</div>
-        <div><input type="text" placeholder="Harun" /></div>
+          <div>Adınız:</div>
+          <div><input id="edit-profile-name" type="text" name="edit-profile-name" placeholder="Harun" /></div>
 
-        <div>Soyadınız:</div>
-        <div><input type="text" placeholder="Can" /></div>
+          <div>Soyadınız:</div>
+          <div><input id="edit-profile-surname" type="text" name="edit-profile-surname" placeholder="Can" /></div>
 
-        <div>Eposta Adresiniz:</div>
-        <div><input type="text" placeholder="eharuncan@gmail.com" /></div>
+          <div>Eposta Adresiniz:</div>
+          <div><input id="edit-profile-email" type="text" name="edit-profile-email" placeholder="eharuncan@gmail.com" /></div>
 
-      </div>
+          <div>Yeni Şifreniz:</div>
+          <div><input type="password" name="edit-profile-password"/></div>
+
+          <div>Yeni Şifreniz (tekrar):</div>
+          <div><input type="password" name="edit-profile-retyped-password"/></div>
+
+        </div>
       <div class="page-menu">
-        <a class="button button-green" href="#show-profile-page">Kaydet</a>
+        <input id="edit-profile-save-button" class="button button-green" type="submit" value="Kaydet" />
       </div>
+    </form>
     </div>
   </section>
 

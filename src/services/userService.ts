@@ -65,10 +65,17 @@ export class UserService {
 
     }
 
-    public editUser(user: User, editedUser: User): boolean {
-        let index = this.getUsers().indexOf(user);
-        this.userListDB[index] = editedUser;
-        return true;
+    public editUser(id: number, editedName: string, editedSurname: string, editedEmail: string, editedPassword: string, retypedPassword: string): boolean {
+        if(this.checkPasswords(editedPassword,retypedPassword)){
+            console.log("buraya girdi");
+            let editedUser = new User(id, UserTypes.CUSTOMER, editedName, editedSurname, editedEmail, editedPassword)
+            let index = this.getUsers().indexOf(this.getUserById(id));
+            this.userListDB[index] = editedUser;
+            this.currentUser = editedUser;
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public deleteUser(userId: number): boolean {
@@ -101,7 +108,7 @@ export class UserService {
     }
 
     public checkPasswords(password1: string, password2: string): boolean {
-        if (password1 === password2) {
+        if (password1 == password2) {
             return true;
         } else {
             return false;
