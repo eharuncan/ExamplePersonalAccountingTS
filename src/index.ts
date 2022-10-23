@@ -61,10 +61,14 @@ const registerMenu = <HTMLDivElement>document.querySelector("#register-menu");
 const loginMenu = <HTMLDivElement>document.querySelector("#login-menu");
 const profileMenu = <HTMLDivElement>document.querySelector("#profile-menu");
 const logoutMenu = <HTMLDivElement>document.querySelector("#logout-menu");
+const showProfileName = <HTMLDivElement>document.querySelector("#show-profile-name");
+const showProfileSurname = <HTMLDivElement>document.querySelector("#show-profile-surname");
+const showProfileEmail = <HTMLDivElement>document.querySelector("#show-profile-email");
 
 const registerButton = <HTMLButtonElement>document.querySelector("#register-button");
 const loginButton = <HTMLButtonElement>document.querySelector("#login-button");
 const logoutButton = <HTMLButtonElement>document.querySelector("#logout-button");
+const profileButton = <HTMLButtonElement>document.querySelector("#profile-button");
 
 const registerForm = document.getElementById("register-form");
 const loginForm = document.getElementById("login-form");
@@ -148,4 +152,11 @@ const handleLogoutClick = () => {
   }
 }
 logoutButton.addEventListener("click", handleLogoutClick);
+
+const handleProfileClick = () => {
+  showProfileName.innerText = userService.currentUser.name;
+  showProfileSurname.innerText = userService.currentUser.surname;
+  showProfileEmail.innerText = userService.currentUser.email;
+}
+profileButton.addEventListener("click", handleProfileClick);
 
