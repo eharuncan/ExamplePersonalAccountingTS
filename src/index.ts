@@ -30,15 +30,6 @@ export let expenseCategoryService: ExpenseCategoryService;
 export let userService: UserService;
 export let expenseService: ExpenseService;
 
-let database = connectDatabase();
-if (database == null) {
-  console.log("Hata: Database'e bağlanma işlemi başarısız.");
-}
-else {
-  console.log("Database'e bağlanma işlemi başarılı.");
-}
-startServices(database);
-
 function connectDatabase(): Database {
   let username = "admin";
   let password = "admin";
@@ -54,6 +45,15 @@ function startServices(database: Database) {
   userService = new UserService(database.userList);
   expenseService = new ExpenseService(database.expenseList);
 }
+
+let database = connectDatabase();
+if (database == null) {
+  console.log("Hata: Database'e bağlanma işlemi başarısız.");
+}
+else {
+  console.log("Database'e bağlanma işlemi başarılı.");
+}
+startServices(database);
 
 const mainMenu = <HTMLDivElement>document.querySelector("#main-menu");
 const expensesMenu = <HTMLDivElement>document.querySelector("#expenses-menu");
