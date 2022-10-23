@@ -56,10 +56,9 @@ export class UserService {
             selectedUserType = UserTypes.CUSTOMER;
         }
 
-        let user = new User(newUserId, selectedUserType, name, surname, email, password)
-
-        this.userListDB.push(user);
-        this.currentUser = user;
+        let newUser = new User(newUserId, selectedUserType, name, surname, email, password)
+        this.userListDB.push(newUser);
+        this.currentUser = newUser;
         console.log(this.currentUser);
         return true;
 

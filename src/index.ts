@@ -57,11 +57,14 @@ startServices(database);
 
 const registerButton = <HTMLButtonElement>document.querySelector("#register-button");
 const loginButton = <HTMLButtonElement>document.querySelector("#login-button");
-const logoutButton = <HTMLButtonElement>document.querySelector("#logout-button");
+const addExpenseButton = <HTMLButtonElement>document.querySelector("#add-expense-button");
+const addExpenseButton2 = <HTMLButtonElement>document.querySelector("#add-expense-button2");
+const addExpenseSaveButton = <HTMLButtonElement>document.querySelector("#add-expense-save-button");
 const showProfileButton = <HTMLButtonElement>document.querySelector("#show-profile-button");
 const editProfileButton = <HTMLButtonElement>document.querySelector("#edit-profile-button");
 const editProfileButton2 = <HTMLButtonElement>document.querySelector("#edit-profile-button2");
 const editProfileSaveButton = <HTMLButtonElement>document.querySelector("#edit-profile-save-button");
+const logoutButton = <HTMLButtonElement>document.querySelector("#logout-button");
 
 function refreshMenus() {
   const mainMenu = <HTMLDivElement>document.querySelector("#main-menu");
@@ -149,16 +152,36 @@ const handleLoginClick = () => {
 }
 loginButton.addEventListener("click", handleLoginClick);
 
-const handleLogoutClick = () => {
-  if (userService.logout()) {
-    console.log("Oturum kapatma işlemi başarılı.");
-    refreshMenus();
-    window.location.replace("#");
-  } else {
-    console.log("Hata: Oturum kapatma işlemi başarısız.");
+const handleAddExpenseClick = () => {
+  window.location.replace("#add-expense-page");
+  const addExpenseDate = <HTMLInputElement>document.querySelector("#add-expense-date");
+  addExpenseDate.setAttribute("value", (new Date(Date.now())).toString());
+};
+addExpenseButton.addEventListener("click", handleAddExpenseClick);
+addExpenseButton2.addEventListener("click", handleAddExpenseClick);
+
+const handleAddExpenseSaveClick = () => {
+  const addExpenseForm = document.getElementById("add-expense-form");
+  if (addExpenseForm != null) {
+    addExpenseForm.onsubmit = () => {
+      const formData = new FormData(<HTMLFormElement>addExpenseForm);
+      const name = formData.get("add-expense-name") as string;
+      const amount = formData.get("add-expense-amount") as string;
+      const date = formData.get("add-expense-date") as string;
+      const categoryId = formData.get("add-expense-category") as string;
+      if (expenseService.addExpense(userService.currentUser.id, name, BigInt(amount), new Date(date), Number(categoryId))) {
+        console.log("Harcama ekleme işlemi başarılı.");
+        refreshMenus();
+        window.location.replace("#show-expenses-page");
+      } else {
+        console.log("Hata: Harcama ekleme işlemi başarısız.");
+      }
+
+      return false; // prevent reload
+    };
   }
-}
-logoutButton.addEventListener("click", handleLogoutClick);
+};
+addExpenseSaveButton.addEventListener("click", handleAddExpenseSaveClick);
 
 const handleShowProfileClick = () => {
   const showProfileName = <HTMLDivElement>document.querySelector("#show-profile-name");
@@ -175,9 +198,9 @@ const handleEditProfileClick = () => {
   const editProfileName = <HTMLInputElement>document.querySelector("#edit-profile-name");
   const editProfileSurname = <HTMLInputElement>document.querySelector("#edit-profile-surname");
   const editProfileEmail = <HTMLInputElement>document.querySelector("#edit-profile-email");
-  editProfileName.setAttribute("placeholder", userService.currentUser.name);
-  editProfileSurname.setAttribute("placeholder", userService.currentUser.surname);
-  editProfileEmail.setAttribute("placeholder", userService.currentUser.email);
+  editProfileName.setAttribute("value", userService.currentUser.name);
+  editProfileSurname.setAttribute("value", userService.currentUser.surname);
+  editProfileEmail.setAttribute("value", userService.currentUser.email);
 }
 editProfileButton.addEventListener("click", handleEditProfileClick);
 editProfileButton2.addEventListener("click", handleEditProfileClick);
@@ -206,3 +229,13 @@ const handleEditProfileSaveClick = () => {
 }
 editProfileSaveButton.addEventListener("click", handleEditProfileSaveClick);
 
+const handleLogoutClick = () => {
+  if (userService.logout()) {
+    console.log("Oturum kapatma işlemi başarılı.");
+    refreshMenus();
+    window.location.replace("#");
+  } else {
+    console.log("Hata: Oturum kapatma işlemi başarısız.");
+  }
+}
+logoutButton.addEventListener("click", handleLogoutClick);

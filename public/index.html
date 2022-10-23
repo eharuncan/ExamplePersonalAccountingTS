@@ -28,7 +28,7 @@
       <div id="expenses-menu" class="dropdown">
         <a class="dropbtn" href="#show-expenses-page">Harcamalarım</a>
         <div class="dropdown-content">
-          <a href="#add-expense-page">Ekle</a>
+          <a id="add-expense-button" href="#add-expense-page">Ekle</a>
           <a href="#edit-expense-page">Düzenle</a>
           <a href="#delete-expense-page">Sil</a>
         </div>
@@ -142,7 +142,7 @@
 
       </div>
       <div class="page-menu">
-        <a class="button button-green" href="#add-expense-page">Ekle</a>
+        <a id="add-expense-button2" class="button button-green" href="#add-expense-page">Ekle</a>
         <a class="button button-yellow" href="#edit-expense-page">Düzenle</a>
         <a class="button button-red" href="#delete-expense-page">Sil</a>
       </div>
@@ -157,7 +157,7 @@
           <form id="add-expense-form">
             <input name ="add-expense-name" type="text" placeholder="Harcama adı" />
             <input name ="add-expense-amount" type="text" placeholder="Miktarı" />
-            <input name ="add-expense-date" type="text" placeholder="Tarihi" />
+            <input id="add-expense-date" name ="add-expense-date" type="text" placeholder="Tarihi" />
             <input name ="add-expense-category" type="text" placeholder="Kategori" />
             <input id="add-expense-save-button" class="button button-green" type="submit" value="Kaydet" />
           </form>

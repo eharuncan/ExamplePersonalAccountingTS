@@ -23,10 +23,7 @@ export class ExpenseService {
         return resultList[0];
     }
 
-    public addExpense(userId: number, newExpense: Expense): boolean {
-        if (this.validateExpense(newExpense)) {
-            newExpense.userId = userId;
-
+    public addExpense(userId: number, name: string, amount: bigint, date: Date, categoryId: number ): boolean {
             let newExpenseId;
             let expenseList = this.expenseListDB;
             if (expenseList.length == 0) {
@@ -35,23 +32,16 @@ export class ExpenseService {
                 let lastExpense = expenseList[expenseList.length - 1];
                 newExpenseId = lastExpense.id + 1;
             }
-            newExpense.id = newExpenseId;
-
+            let newExpense = new Expense(userId, newExpenseId, name, amount, date, categoryId);
+            console.log("newExpense", newExpense);
             this.expenseListDB.push(newExpense);
             return true;
-        } else {
-            return false;
-        }
     }
 
     public editExpense(expense: Expense, editedExpense: Expense): boolean {
-        if (this.validateExpense(editedExpense)) {
             let index = this.getExpenses().indexOf(expense);
             this.expenseListDB[index] = editedExpense;
             return true;
-        } else {
-            return false;
-        }
     }
 
     public deleteExpense(userId: number, expenseId: number): boolean {
@@ -60,11 +50,6 @@ export class ExpenseService {
         if (index > -1) {
             this.expenseListDB.splice(index, 1);
         }
-        return true;
-    }
-
-    public validateExpense(expense: Expense): boolean {
-        //todo: burası yazılacak
         return true;
     }
 
