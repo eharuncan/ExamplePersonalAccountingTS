@@ -32,10 +32,10 @@ export let expenseService: ExpenseService;
 
 let database = connectDatabase();
 if (database == null) {
-  console.log("Hata: Database'e bağlanılamadı.");
+  console.log("Hata: Database'e bağlanma işlemi başarısız.");
 }
 else {
-  console.log("Database'e başarıyla bağlandı.");
+  console.log("Database'e bağlanma işlemi başarılı.");
 }
 startServices(database);
 
@@ -55,7 +55,42 @@ function startServices(database: Database) {
   expenseService = new ExpenseService(database.expenseList);
 }
 
+const expensesMenu = <HTMLDivElement>document.querySelector("#expenses-menu");
+const categoriesMenu = <HTMLDivElement>document.querySelector("#categories-menu");
+const registerMenu = <HTMLDivElement>document.querySelector("#register-menu");
+const loginMenu = <HTMLDivElement>document.querySelector("#login-menu");
+const profileMenu = <HTMLDivElement>document.querySelector("#profile-menu");
+const logoutMenu = <HTMLDivElement>document.querySelector("#logout-menu");
+
+const registerButton = <HTMLButtonElement>document.querySelector("#register-button");
+const loginButton = <HTMLButtonElement>document.querySelector("#login-button");
+const logoutButton = <HTMLButtonElement>document.querySelector("#logout-button");
+
 const registerForm = document.getElementById("register-form");
+const loginForm = document.getElementById("login-form");
+
+function refreshMenus (){
+  if (userService.currentUser == null) {
+    expensesMenu.setAttribute("style", "display: none;");
+    categoriesMenu.setAttribute("style", "display: none;");
+    logoutMenu.setAttribute("style", "display: none;");
+    profileMenu.setAttribute("style", "display: none;");
+    registerMenu.setAttribute("style", "display: block;");
+    loginMenu.setAttribute("style", "display: block;");
+  }else{
+    registerMenu.setAttribute("style", "display: none;");
+    loginMenu.setAttribute("style", "display: none;");
+    expensesMenu.setAttribute("style", "display: block;");
+    categoriesMenu.setAttribute("style", "display: block;");
+    logoutMenu.setAttribute("style", "display: block;");
+    logoutButton.innerText = "Oturumu Kapat (" + userService.currentUser.name + ")"
+    profileMenu.setAttribute("style", "display: block;");
+  }
+}
+
+refreshMenus();
+
+const handleRegisterClick = () => {
 if (registerForm != null) {
   registerForm.onsubmit = () => {
     const formData = new FormData(<HTMLFormElement>registerForm);
@@ -67,24 +102,20 @@ if (registerForm != null) {
     const retypedPassword = formData.get("userRetypedPassword") as string;
 
     if (userService.register(name, surname, email, password, retypedPassword)) {
-      console.log("Kayıt İşlemi Başarılı");
-      let currentUser = userService.currentUser;
-      console.log(currentUser.id);
-      console.log(currentUser.type);
-      console.log(currentUser.name);
-      console.log(currentUser.surname);
-      console.log(currentUser.email);
-      console.log(currentUser.password);
-      console.log(userService.getUsers);
+      console.log("Kayıt işlemi başarılı.");
+      refreshMenus();
+      window.location.replace("#show-expenses-page");
     } else {
-      console.log("Hata: Kayıt İşlemi Başarısız");
+      console.log("Hata: Kayıt işlemi başarısız.");
     }
 
     return false; // prevent reload
   };
 }
+};
+registerButton.addEventListener("click", handleRegisterClick);
 
-const loginForm = document.getElementById("login-form");
+const handleLoginClick = () => {
 if (loginForm != null) {
   loginForm.onsubmit = () => {
     const formData = new FormData(<HTMLFormElement>loginForm);
@@ -93,20 +124,28 @@ if (loginForm != null) {
     const password = formData.get("userPassword") as string;
 
     if (userService.login(email, password)) {
-      console.log("Oturum Açma İşlemi Başarılı");
-      let currentUser = userService.currentUser;
-      console.log(currentUser.id);
-      console.log(currentUser.type);
-      console.log(currentUser.name);
-      console.log(currentUser.surname);
-      console.log(currentUser.email);
-      console.log(currentUser.password);
+      console.log("Oturum açma işlemi başarılı.");
+      refreshMenus();
+      window.location.replace("#show-expenses-page");
     } else {
-      console.log("Hata: Oturum Açma İşlemi Başarısız");
+      console.log("Hata: Oturum açma işlemi başarısız.");
     }
 
     return false; // prevent reload
   };
 }
+}
+loginButton.addEventListener("click", handleLoginClick);
 
+
+const handleLogoutClick = () => {
+  if (userService.logout()) {
+    console.log("Oturum kapatma işlemi başarılı.");
+    refreshMenus();
+    window.location.replace("#");
+  } else {
+    console.log("Hata: Oturum kapatma işlemi başarısız.");
+  }
+}
+logoutButton.addEventListener("click", handleLogoutClick);
 

@@ -31,10 +31,8 @@ export class Database {
 
     get userList(): Array<User> {
         if (Database.connectStatus){
-            console.log("user list geldi.");
             return Database.userList;
         }else{
-            console.log("user list gelmedi.");
             return null as any;
         }
     }

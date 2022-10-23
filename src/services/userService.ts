@@ -13,7 +13,7 @@ export class UserService {
         this.register("admin", "admin", "admin", "admin", "admin");
         this.register("customer1", "customer1", "1", "1", "1");
 
-        this._currentUser = null as any;;
+        this._currentUser = null as any;
     }
 
     public getUsers(): Array<User> {
@@ -21,15 +21,12 @@ export class UserService {
     }
 
     public getUserById(userId: number): User {
-        let resultList = this.userListDB
-            .filter((user) => { user.id === userId });
+        let resultList = this.userListDB.filter((user) => user.id == userId);
         return resultList[0];
     }
 
     public getUserByEmailAndPassword(email: string, password: string): User {
-        let resultList = this.userListDB
-            .filter((user) => { user.email === email && user.password === password });
-            console.log(resultList);
+        let resultList = this.userListDB.filter((user) => user.email == email && user.password == password );
         return resultList[0];
     }
 
@@ -63,6 +60,7 @@ export class UserService {
 
         this.userListDB.push(user);
         this.currentUser = user;
+        console.log(this.currentUser);
         return true;
 
     }
@@ -89,6 +87,7 @@ export class UserService {
     public login(email: string, password: string): boolean {
         if (this.checkUser(email, password)) {
             this.currentUser = this.getUserByEmailAndPassword(email, password);
+            console.log(this.currentUser);
             return true;
         } else {
             return false;
@@ -110,13 +109,13 @@ export class UserService {
     }
 
     public checkUser(email: string, password: string): boolean {
-        let resultList = this.userListDB
-            .filter((user) => { user.email == email && user.password == password });
-        if (resultList.length === 0) {
+        let resultList = this.userListDB.filter((user) => user.email == email && user.password == password );
+        if (resultList.length == 0) {
+            console.log("Hata: Sistemde kayıtlı böyle bir kullanıcı yok.")
             return false;
         } else {
             return true;
-        }
+        }     
     }
 
     get currentUser(): User {
