@@ -55,6 +55,7 @@ function startServices(database: Database) {
   expenseService = new ExpenseService(database.expenseList);
 }
 
+const mainMenu = <HTMLDivElement>document.querySelector("#main-menu");
 const expensesMenu = <HTMLDivElement>document.querySelector("#expenses-menu");
 const categoriesMenu = <HTMLDivElement>document.querySelector("#categories-menu");
 const registerMenu = <HTMLDivElement>document.querySelector("#register-menu");
@@ -79,9 +80,11 @@ function refreshMenus (){
     categoriesMenu.setAttribute("style", "display: none;");
     logoutMenu.setAttribute("style", "display: none;");
     profileMenu.setAttribute("style", "display: none;");
+    mainMenu.setAttribute("style", "display: block;");
     registerMenu.setAttribute("style", "display: block;");
     loginMenu.setAttribute("style", "display: block;");
   }else{
+    mainMenu.setAttribute("style", "display: none;");
     registerMenu.setAttribute("style", "display: none;");
     loginMenu.setAttribute("style", "display: none;");
     expensesMenu.setAttribute("style", "display: block;");
