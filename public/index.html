@@ -21,25 +21,25 @@
         <a href="#show-expenses-page" class="dropbtn">Harcamalarım</a>
         <div class="dropdown-content">
           <a href="#add-expense-page">Ekle</a>
-          <a href="#home">Düzenle</a>
-          <a href="#home">Sil</a>
+          <a href="#edit-expense-page">Düzenle</a>
+          <a href="#delete-expense-page">Sil</a>
         </div>
       </div>
       <div class="dropdown">
         <a href="#show-categories-page" class="dropbtn">Kategorilerim</a>
         <div class="dropdown-content">
           <a href="#add-category-page">Ekle</a>
-          <a href="#home">Düzenle</a>
-          <a href="#home">Sil</a>
+          <a href="#edit-category-page">Düzenle</a>
+          <a href="#delete-category-page">Sil</a>
         </div>
       </div>
       <div class="dropdown">
-        <a href="#home" class="dropbtn">Profilim</a>
+        <a href="#show-profile-page" class="dropbtn">Profilim</a>
         <div class="dropdown-content">
-          <a href="#home">Düzenle</a>
+          <a href="#edit-profile-page">Düzenle</a>
         </div>
       </div>
-      <a href="#contact">Oturumu Kapat</a>
+      <a href="#login-page">Oturumu Kapat</a>
     </div>
   </header>
 
@@ -54,7 +54,7 @@
             <input type="text" placeholder="Eposta adresiniz" />
             <input type="password" placeholder="Şifreniz" />
             <input type="password" placeholder="Şifrenizi tekrar giriniz" />
-            <button>Kaydol</button>
+            <button class="button button-green">Kaydol</button>
             <p class="message">Kayıtlı mısın? <a href="#login-page">Giriş Yap</a></p>
           </form>
         </div>
@@ -70,7 +70,7 @@
           <form class="login-form">
             <input type="text" placeholder="Eposta adresiniz" />
             <input type="password" placeholder="Şifreniz" />
-            <button>Giriş Yap</button>
+            <button class="button button-green">Giriş Yap</button>
             <p class="message">Kayıtlı değil misin? <a href="#register-page">Hesap Oluştur</a></p>
           </form>
         </div>
@@ -90,18 +90,23 @@
         <div>Kategorisi</div>
 
         
-        <div>2.00</div>
-        <div>1.00</div>
-        <div>3.00</div>
-        <div>4.00</div>
+        <div>1</div>
+        <div>Harcama 1</div>
+        <div>100</div>
+        <div>21.10.2022</div>
+        <div>Kategori 1</div>
 
-        <div>Very long d</div>
-        <div>Description</div>
-        <div>A description</div>
-        <div>Longer description</div>
-        <div>Too long for the second column</div>
-        <div>Another description</div>
+        <div>2</div>
+        <div>Harcama 2</div>
+        <div>200</div>
+        <div>22.10.2022</div>
+        <div>Kategori 2</div>
 
+      </div>
+      <div class="page-menu">
+        <a href="#add-expense-page" class="button button-green">Ekle</a>
+        <a href="#edit-expense-page" class="button button-yellow">Düzenle</a>
+        <a href="#delete-expense-page" class="button button-red">Sil</a>
       </div>
     </div>
   </div>
@@ -116,10 +121,24 @@
             <input type="text" placeholder="Miktarı" />
             <input type="text" placeholder="Tarihi" />
             <input type="text" placeholder="Kategori" />
-            <button>Kaydet</button>
+            <button class="button button-green">Kaydet</button>
           </form>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div id="edit-expense-page" class="page">
+    <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
+    <div class="page-content">
+      
+    </div>
+  </div>
+
+  <div id="delete-expense-page" class="page">
+    <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
+    <div class="page-content">
+      
     </div>
   </div>
 
@@ -131,12 +150,17 @@
         <div>Kategori ID</div>
         <div>Adı</div>
 
-        <div>2.00</div>
-        <div>1.00</div>
+        <div>1</div>
+        <div>Kategori 1</div>
 
-        <div>Very long d</div>
-        <div>Description</div>
+        <div>2</div>
+        <div>Kategori 2</div>
 
+      </div>
+      <div class="page-menu">
+        <a href="#add-category-page" class="button button-green">Ekle</a>
+        <a href="#edit-category-page" class="button button-yellow">Düzenle</a>
+        <a href="#delete-category-page" class="button button-red">Sil</a>
       </div>
     </div>
   </div>
@@ -148,26 +172,55 @@
         <div class="form">
           <form class="login-form">
             <input type="text" placeholder="Kategori adı" />
-            <button>Kaydet</button>
+            <button class="button button-green">Kaydet</button>
           </form>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="data-edit-page" class="page">
+  <div id="edit-category-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
     <div class="page-content">
-
+      
     </div>
   </div>
 
-  <div id="data-remove-page" class="page">
+  <div id="delete-category-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
     <div class="page-content">
-
+      
     </div>
   </div>
+
+  <div id="show-profile-page" class="page">
+    <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
+    <div class="page-content">
+      <div class="data-grid-2-column-reverse">
+
+        <div>Adınız:</div>
+        <div>Harun</div>
+
+        <div>Soyadınız:</div>
+        <div>Can</div>
+
+        <div>Eposta Adresiniz:</div>
+        <div>eharuncan@gmail.com</div>
+
+      </div>
+      <div class="page-menu">
+        <a href="#edit-profile-page" class="button button-yellow">Profilini Düzenle</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="edit-profile-page" class="page">
+    <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
+    <div class="page-content">
+      
+    </div>
+  </div>
+
 
   <footer class="footer">2022 Şahsi Muhasebem</footer>
 </body>
