@@ -34,10 +34,12 @@ else {
 startServices(database);
 
 const mainButton = <HTMLButtonElement>document.querySelector("#main-button");
-const registerButton = <HTMLButtonElement>document.querySelector("#register-button");
-const registerSaveButton = <HTMLButtonElement>document.querySelector("#register-save-button");
-const loginButton = <HTMLButtonElement>document.querySelector("#login-button");
-const loginSaveButton = <HTMLButtonElement>document.querySelector("#login-save-button");
+
+const showUsersButton = <HTMLButtonElement>document.querySelector("#show-users-button");
+const deleteUserButton = <HTMLButtonElement>document.querySelector("#delete-user-button");
+const deleteUserButton2 = <HTMLButtonElement>document.querySelector("#delete-user-button2");
+const deleteUserSaveButton = <HTMLButtonElement>document.querySelector("#delete-user-save-button");
+
 const showExpensesButton = <HTMLButtonElement>document.querySelector("#show-expenses-button");
 const addExpenseButton = <HTMLButtonElement>document.querySelector("#add-expense-button");
 const addExpenseButton2 = <HTMLButtonElement>document.querySelector("#add-expense-button2");
@@ -48,6 +50,7 @@ const editExpenseSaveButton = <HTMLButtonElement>document.querySelector("#edit-e
 const deleteExpenseButton = <HTMLButtonElement>document.querySelector("#delete-expense-button");
 const deleteExpenseButton2 = <HTMLButtonElement>document.querySelector("#delete-expense-button2");
 const deleteExpenseSaveButton = <HTMLButtonElement>document.querySelector("#delete-expense-save-button");
+
 const showCategoriesButton = <HTMLButtonElement>document.querySelector("#show-categories-button");
 const addCategoryButton = <HTMLButtonElement>document.querySelector("#add-category-button");
 const addCategoryButton2 = <HTMLButtonElement>document.querySelector("#add-category-button2");
@@ -58,10 +61,18 @@ const editCategorySaveButton = <HTMLButtonElement>document.querySelector("#edit-
 const deleteCategoryButton = <HTMLButtonElement>document.querySelector("#delete-category-button");
 const deleteCategoryButton2 = <HTMLButtonElement>document.querySelector("#delete-category-button2");
 const deleteCategorySaveButton = <HTMLButtonElement>document.querySelector("#delete-category-save-button");
+
+const loginButton = <HTMLButtonElement>document.querySelector("#login-button");
+const loginSaveButton = <HTMLButtonElement>document.querySelector("#login-save-button");
+
+const registerButton = <HTMLButtonElement>document.querySelector("#register-button");
+const registerSaveButton = <HTMLButtonElement>document.querySelector("#register-save-button");
+
 const showProfileButton = <HTMLButtonElement>document.querySelector("#show-profile-button");
 const editProfileButton = <HTMLButtonElement>document.querySelector("#edit-profile-button");
 const editProfileButton2 = <HTMLButtonElement>document.querySelector("#edit-profile-button2");
 const editProfileSaveButton = <HTMLButtonElement>document.querySelector("#edit-profile-save-button");
+
 const logoutButton = <HTMLButtonElement>document.querySelector("#logout-button");
 
 function refreshMenus() {
@@ -152,7 +163,14 @@ const handleLoginSaveClick = () => {
         console.log("Oturum açma işlemi başarılı.");
         refreshMenus();
         handleShowExpensesClick();
-        window.location.replace("#show-expenses-page");
+        if(userService.currentUser.type == "CUSTOMER"){
+          window.location.replace("#show-expenses-page");
+          handleShowExpensesClick();
+        }else if (userService.currentUser.type == "ADMIN"){
+          window.location.replace("#show-users-page");
+          handleShowUsersClick();
+        }
+        
       } else {
         console.log("Hata: Oturum açma işlemi başarısız.");
       }
@@ -166,6 +184,46 @@ loginSaveButton.addEventListener("click", handleLoginSaveClick);
 function removeAllChildNodes(parent: HTMLDivElement) {
   while (parent.firstChild) {
       parent.removeChild(parent.firstChild);
+  }
+}
+
+function showUsers(elementId: string){
+  const userList = <HTMLDivElement>document.querySelector(elementId);
+  removeAllChildNodes(userList);
+  let users = userService.getUsers();
+
+    let divElementId = document.createElement("div");
+    divElementId.innerText = "ID";
+    userList.appendChild(divElementId);
+
+    let divElementName = document.createElement("div");
+    divElementName.innerText = "Adı";
+    userList.appendChild(divElementName);
+
+    let divElementSurname = document.createElement("div");
+    divElementSurname.innerText = "Soyadı";
+    userList.appendChild(divElementSurname);
+
+    let divElementEmail = document.createElement("div");
+    divElementEmail.innerText = "Eposta adresi";
+    userList.appendChild(divElementEmail);
+
+  for (let index = 0; index < users.length; index++) {
+    let divElementId = document.createElement("div");
+    divElementId.innerText = users[index].id.toString();
+    userList.appendChild(divElementId);
+
+    let divElementName = document.createElement("div");
+    divElementName.innerText = users[index].name;
+    userList.appendChild(divElementName);
+
+    let divElementSurname = document.createElement("div");
+    divElementSurname.innerText = users[index].surname;
+    userList.appendChild(divElementSurname);
+
+    let divElementEmail = document.createElement("div");
+    divElementEmail.innerText = users[index].email;
+    userList.appendChild(divElementEmail);
   }
 }
 
@@ -240,6 +298,38 @@ function showUserExpenseCategories(elementId: string){
     userCategoryList.appendChild(divElementName);
   }
 }
+
+const handleShowUsersClick = () => {
+  window.location.replace("#show-users-page");
+  showUsers("#show-users-list");
+};
+showUsersButton.addEventListener("click", handleShowUsersClick);
+
+const handleDeleteUserClick = () => {
+  showUsers("#delete-user-list")
+  window.location.replace("#delete-user-page");
+}
+deleteUserButton.addEventListener("click", handleDeleteUserClick);
+deleteUserButton2.addEventListener("click", handleDeleteUserClick);
+
+const handleDeleteUserSaveClick = () => {
+  const deleteUserForm = document.getElementById("delete-user-form");
+  if (deleteUserForm != null) {
+    deleteUserForm.onsubmit = () => {
+      const formData = new FormData(<HTMLFormElement>deleteUserForm);
+      const id = formData.get("delete-user-id") as string;
+      if (userService.deleteUser(Number(id))) {
+        console.log("Kullanıcı silme işlemi başarılı.");
+        handleShowUsersClick();
+        window.location.replace("#show-users-page");
+      } else {
+        console.log("Hata: Kullanıcı silme işlemi başarısız.");
+      }
+      return false; // prevent reload
+    };
+  }
+}
+deleteUserSaveButton.addEventListener("click", handleDeleteUserSaveClick);
 
 const handleShowExpensesClick = () => {
   window.location.replace("#show-expenses-page");
@@ -353,7 +443,7 @@ const handleAddCategorySaveClick = () => {
   if (addCategoryForm != null) {
     addCategoryForm.onsubmit = () => {
       const formData = new FormData(<HTMLFormElement>addCategoryForm);
-      const name = formData.get("show-categories-name") as string;
+      const name = formData.get("add-category-name") as string;
       if (expenseCategoryService.addExpenseCategory(userService.currentUser.id, name)) {
         console.log("Kategori ekleme işlemi başarılı.");
         handleShowCategoriesClick();
