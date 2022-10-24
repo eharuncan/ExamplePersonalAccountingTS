@@ -7,10 +7,12 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
+
 html {
   width: 100%;
   height: 100%;
 }
+
 body {
   width: 100%;
   height: 100%;
@@ -25,6 +27,7 @@ body {
   height: 50px;
   z-index: 999;
 }
+
 .navbar a {
   display: block;
   color: #f2f2f2;
@@ -33,6 +36,7 @@ body {
   text-decoration: none;
   font-size: 17px;
 }
+
 .navbar a:hover {
   background: #ddd;
   color: black;
@@ -41,29 +45,33 @@ body {
 .dropdown {
   display: inline-block;
 }
+
 .dropdown-content {
   margin-top: 50px;
   display: none;
   position: absolute;
   background-color: #333;
   min-width: 140px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
+
 .dropdown-content a {
   color: rgb(255, 255, 255);
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-.page{
+.page {
   width: 100%;
   height: 100%;
 }
+
 .page-background {
   position: absolute;
   background-size: cover;
@@ -71,7 +79,8 @@ body {
   height: 100%;
   filter: blur(5px);
 }
-.page-content{
+
+.page-content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,6 +99,7 @@ body {
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
 .form input {
   outline: 0;
   background: #f2f2f2;
@@ -100,6 +110,7 @@ body {
   box-sizing: border-box;
   font-size: 14px;
 }
+
 .form button {
   text-transform: uppercase;
   outline: 0;
@@ -113,14 +124,19 @@ body {
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
+
+.form button:hover,
+.form button:active,
+.form button:focus {
   background: #43A047;
 }
+
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
   font-size: 12px;
 }
+
 .form .message a {
   color: #4CAF50;
   text-decoration: none;
@@ -132,15 +148,19 @@ body {
   max-width: 300px;
   margin: 0 auto;
 }
-.container:before, .container:after {
+
+.container:before,
+.container:after {
   content: "";
   display: block;
   clear: both;
 }
+
 .container .info {
   margin: 50px auto;
   text-align: center;
 }
+
 .container .info h1 {
   margin: 0 0 15px;
   padding: 0;
@@ -149,21 +169,35 @@ body {
   color: #1a1a1a;
 }
 
-.data-grid {
+.data-grid-2-column {
   display: grid;
-  grid-template-columns: 1fr 1fr 80%; 
+  grid-template-columns: 50% 50%;
   max-width: 480px;
 }
-.data-grid > div {
-margin: 2px;
-background: powderblue;
-padding: 5px;
+.data-grid-2-column>div {
+  margin: 2px;
+  background: rgb(255, 255, 255);
+  padding: 5px;
 }
-.data-grid > div:nth-child(3n+2) {
-background: lemonchiffon;
+.data-grid-2-column>div:nth-child(1),.data-grid-2-column>div:nth-child(2) {
+  color: rgb(255, 255, 255);
+  background: #333;
 }
-.data-grid > div:nth-child(3n+3) {
-background: palegreen;
+
+
+.data-grid-5-column {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  max-width: 480px;
+}
+.data-grid-5-column>div {
+  margin: 2px;
+  background: rgb(255, 255, 255);
+  padding: 5px;
+}
+.data-grid-5-column>div:nth-child(1),.data-grid-5-column>div:nth-child(2),.data-grid-5-column>div:nth-child(3),.data-grid-5-column>div:nth-child(4),.data-grid-5-column>div:nth-child(5){
+  color: rgb(255, 255, 255);
+  background: #333;
 }
 
 .footer {
@@ -176,4 +210,3 @@ background: palegreen;
   color: #f2f2f2;
   font-size: 17px;
 }
-
