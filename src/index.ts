@@ -57,13 +57,19 @@ startServices(database);
 
 const registerButton = <HTMLButtonElement>document.querySelector("#register-button");
 const loginButton = <HTMLButtonElement>document.querySelector("#login-button");
-const logoutButton = <HTMLButtonElement>document.querySelector("#logout-button");
+const addExpenseButton = <HTMLButtonElement>document.querySelector("#add-expense-button");
+const addExpenseButton2 = <HTMLButtonElement>document.querySelector("#add-expense-button2");
+const addExpenseSaveButton = <HTMLButtonElement>document.querySelector("#add-expense-save-button");
 const showProfileButton = <HTMLButtonElement>document.querySelector("#show-profile-button");
-const editProfileButton = <HTMLButtonElement>document.querySelector(".edit-profile-button");
+const editProfileButton = <HTMLButtonElement>document.querySelector("#edit-profile-button");
+const editProfileButton2 = <HTMLButtonElement>document.querySelector("#edit-profile-button2");
 const editProfileSaveButton = <HTMLButtonElement>document.querySelector("#edit-profile-save-button");
+const logoutButton = <HTMLButtonElement>document.querySelector("#logout-button");
 
 function refreshMenus() {
   const mainMenu = <HTMLDivElement>document.querySelector("#main-menu");
+  const addUserMenu = <HTMLDivElement>document.querySelector("#add-user-menu");
+  const deleteUserMenu = <HTMLDivElement>document.querySelector("#delete-user-menu");
   const expensesMenu = <HTMLDivElement>document.querySelector("#expenses-menu");
   const categoriesMenu = <HTMLDivElement>document.querySelector("#categories-menu");
   const registerMenu = <HTMLDivElement>document.querySelector("#register-menu");
@@ -71,19 +77,28 @@ function refreshMenus() {
   const profileMenu = <HTMLDivElement>document.querySelector("#profile-menu");
   const logoutMenu = <HTMLDivElement>document.querySelector("#logout-menu");
   if (userService.currentUser == null) {
+    mainMenu.setAttribute("style", "display: block;");
+    loginMenu.setAttribute("style", "display: block;");
+    registerMenu.setAttribute("style", "display: block;");
+
+    addUserMenu.setAttribute("style", "display: none;");
+    deleteUserMenu.setAttribute("style", "display: none;");
     expensesMenu.setAttribute("style", "display: none;");
     categoriesMenu.setAttribute("style", "display: none;");
-    logoutMenu.setAttribute("style", "display: none;");
     profileMenu.setAttribute("style", "display: none;");
-    mainMenu.setAttribute("style", "display: block;");
-    registerMenu.setAttribute("style", "display: block;");
-    loginMenu.setAttribute("style", "display: block;");
+    logoutMenu.setAttribute("style", "display: none;");
   } else {
+    if(userService.currentUser.type == "ADMIN"){
+      addUserMenu.setAttribute("style", "display: block;");
+      deleteUserMenu.setAttribute("style", "display: block;");
+    }else{
+      expensesMenu.setAttribute("style", "display: block;");
+      categoriesMenu.setAttribute("style", "display: block;");
+    }
     mainMenu.setAttribute("style", "display: none;");
-    registerMenu.setAttribute("style", "display: none;");
     loginMenu.setAttribute("style", "display: none;");
-    expensesMenu.setAttribute("style", "display: block;");
-    categoriesMenu.setAttribute("style", "display: block;");
+    registerMenu.setAttribute("style", "display: none;");
+
     logoutMenu.setAttribute("style", "display: block;");
     logoutButton.innerText = "Oturumu Kapat (" + userService.currentUser.name + ")"
     profileMenu.setAttribute("style", "display: block;");
@@ -137,16 +152,49 @@ const handleLoginClick = () => {
 }
 loginButton.addEventListener("click", handleLoginClick);
 
-const handleLogoutClick = () => {
-  if (userService.logout()) {
-    console.log("Oturum kapatma işlemi başarılı.");
-    refreshMenus();
-    window.location.replace("#");
-  } else {
-    console.log("Hata: Oturum kapatma işlemi başarısız.");
+const handleAddExpenseClick = () => {
+  window.location.replace("#add-expense-page");
+  const addExpenseDate = <HTMLInputElement>document.querySelector("#add-expense-date");
+  addExpenseDate.setAttribute("value", (new Date(Date.now())).toString());
+
+  const addExpenseShowCategoriesList = <HTMLDivElement>document.querySelector("#add-expense-show-categories-list");
+  let userCategories = expenseCategoryService.getExpenseCategoriesByUserId(userService.currentUser.id);
+  for (let index = 0; index < userCategories.length; index++) {
+    let divElementId = document.createElement("div");
+    divElementId.innerText = userCategories[index].id.toString();
+    addExpenseShowCategoriesList.appendChild(divElementId);
+
+    let divElementName = document.createElement("div");
+    divElementName.innerText = userCategories[index].name;
+    addExpenseShowCategoriesList.appendChild(divElementName);
   }
-}
-logoutButton.addEventListener("click", handleLogoutClick);
+  
+};
+addExpenseButton.addEventListener("click", handleAddExpenseClick);
+addExpenseButton2.addEventListener("click", handleAddExpenseClick);
+
+const handleAddExpenseSaveClick = () => {
+  const addExpenseForm = document.getElementById("add-expense-form");
+  if (addExpenseForm != null) {
+    addExpenseForm.onsubmit = () => {
+      const formData = new FormData(<HTMLFormElement>addExpenseForm);
+      const name = formData.get("add-expense-name") as string;
+      const amount = formData.get("add-expense-amount") as string;
+      const date = formData.get("add-expense-date") as string;
+      const categoryId = formData.get("add-expense-category") as string;
+      if (expenseService.addExpense(userService.currentUser.id, name, BigInt(amount), new Date(date), Number(categoryId))) {
+        console.log("Harcama ekleme işlemi başarılı.");
+        refreshMenus();
+        window.location.replace("#show-expenses-page");
+      } else {
+        console.log("Hata: Harcama ekleme işlemi başarısız.");
+      }
+
+      return false; // prevent reload
+    };
+  }
+};
+addExpenseSaveButton.addEventListener("click", handleAddExpenseSaveClick);
 
 const handleShowProfileClick = () => {
   const showProfileName = <HTMLDivElement>document.querySelector("#show-profile-name");
@@ -159,14 +207,16 @@ const handleShowProfileClick = () => {
 showProfileButton.addEventListener("click", handleShowProfileClick);
 
 const handleEditProfileClick = () => {
+  window.location.replace("#edit-profile-page");
   const editProfileName = <HTMLInputElement>document.querySelector("#edit-profile-name");
   const editProfileSurname = <HTMLInputElement>document.querySelector("#edit-profile-surname");
   const editProfileEmail = <HTMLInputElement>document.querySelector("#edit-profile-email");
-  editProfileName.setAttribute("placeholder", userService.currentUser.name);
-  editProfileSurname.setAttribute("placeholder", userService.currentUser.surname);
-  editProfileEmail.setAttribute("placeholder", userService.currentUser.email);
+  editProfileName.setAttribute("value", userService.currentUser.name);
+  editProfileSurname.setAttribute("value", userService.currentUser.surname);
+  editProfileEmail.setAttribute("value", userService.currentUser.email);
 }
 editProfileButton.addEventListener("click", handleEditProfileClick);
+editProfileButton2.addEventListener("click", handleEditProfileClick);
 
 const handleEditProfileSaveClick = () => {
   const editProfileForm = document.getElementById("edit-profile-form");
@@ -192,3 +242,13 @@ const handleEditProfileSaveClick = () => {
 }
 editProfileSaveButton.addEventListener("click", handleEditProfileSaveClick);
 
+const handleLogoutClick = () => {
+  if (userService.logout()) {
+    console.log("Oturum kapatma işlemi başarılı.");
+    refreshMenus();
+    window.location.replace("#");
+  } else {
+    console.log("Hata: Oturum kapatma işlemi başarısız.");
+  }
+}
+logoutButton.addEventListener("click", handleLogoutClick);

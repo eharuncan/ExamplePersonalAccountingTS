@@ -14,13 +14,13 @@ export class ExpenseCategoryService {
 
     public getExpenseCategoriesByUserId(userId: number): Array<ExpenseCategory> {
         let resultList;
-        resultList = this.expenseCategoryListDB.filter((expenseCategory) => {expenseCategory.userId === userId});
+        resultList = this.expenseCategoryListDB.filter((expenseCategory) => expenseCategory.userId === userId);
         return resultList;
     }
 
     public getExpenseCategoryByUserIdAndExpenseCategoryId(userId: number, expenseCategoryId: number): ExpenseCategory {
         let resultList;
-        resultList = this.expenseCategoryListDB.filter((expenseCategory) => {expenseCategory.userId === userId && expenseCategory.id === expenseCategoryId});
+        resultList = this.expenseCategoryListDB.filter((expenseCategory) => expenseCategory.userId === userId && expenseCategory.id === expenseCategoryId);
         return resultList[0];
     }
 
