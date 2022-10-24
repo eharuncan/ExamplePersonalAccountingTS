@@ -185,31 +185,13 @@
   <section id="delete-expense-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/expenses-bg.jpg');"></div>
     <div class="page-content">
-      <div class="data-grid-5-column">
-
-        <div>Harcama ID</div>
-        <div>Adı</div>
-        <div>Miktarı</div>
-        <div>Tarihi</div>
-        <div>Kategorisi</div>
-
-        <div>1</div>
-        <div>Harcama 1</div>
-        <div>100</div>
-        <div>21.10.2022</div>
-        <div>Kategori 1</div>
-
-        <div>2</div>
-        <div>Harcama 2</div>
-        <div>200</div>
-        <div>22.10.2022</div>
-        <div>Kategori 2</div>
-
+      <div id="delete-expense-list" class="data-grid-5-column">
+        <!-- user expenses list -->
       </div>
       <div class="input-page">
         <div class="form">
-          <form id="xxx-form">
-            <input type="text" placeholder="Silinecek Harcama ID" />
+          <form id="delete-expense-form">
+            <input name="delete-expense-id" type="text" placeholder="Silinecek Harcama ID" />
             <input id="delete-expense-save-button" class="button button-red" type="submit" value="Sil" />
           </form>
         </div>

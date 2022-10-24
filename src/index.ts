@@ -45,12 +45,12 @@ const addExpenseSaveButton = <HTMLButtonElement>document.querySelector("#add-exp
 const editExpenseButton = <HTMLButtonElement>document.querySelector("#edit-expense-button");
 const editExpenseButton2 = <HTMLButtonElement>document.querySelector("#edit-expense-button2");
 const editExpenseSaveButton = <HTMLButtonElement>document.querySelector("#edit-expense-save-button");
-// const deleteExpenseButton = <HTMLButtonElement>document.querySelector("#delete-expense-button");
-// const deleteExpenseButton2 = <HTMLButtonElement>document.querySelector("#delete-expense-button2");
-// const deleteExpenseSaveButton = <HTMLButtonElement>document.querySelector("#delete-expense-save-button");
+const deleteExpenseButton = <HTMLButtonElement>document.querySelector("#delete-expense-button");
+const deleteExpenseButton2 = <HTMLButtonElement>document.querySelector("#delete-expense-button2");
+const deleteExpenseSaveButton = <HTMLButtonElement>document.querySelector("#delete-expense-save-button");
 const showCategoriesButton = <HTMLButtonElement>document.querySelector("#show-categories-button");
-// const addCategoryButton = <HTMLButtonElement>document.querySelector("#add-category-button");
-// const addCategoryButton2 = <HTMLButtonElement>document.querySelector("#add-category-button2");
+const addCategoryButton = <HTMLButtonElement>document.querySelector("#add-category-button");
+const addCategoryButton2 = <HTMLButtonElement>document.querySelector("#add-category-button2");
 const addCategorySaveButton = <HTMLButtonElement>document.querySelector("#add-category-save-button");
 const editCategoryButton = <HTMLButtonElement>document.querySelector("#edit-category-button");
 const editCategoryButton2 = <HTMLButtonElement>document.querySelector("#edit-category-button2");
@@ -310,11 +310,43 @@ const handleEditExpenseSaveClick = () => {
 }
 editExpenseSaveButton.addEventListener("click", handleEditExpenseSaveClick);
 
+const handleDeleteExpenseClick = () => {
+  showUserExpenses("#delete-expense-list")
+  window.location.replace("#delete-expense-page");
+}
+deleteExpenseButton.addEventListener("click", handleDeleteExpenseClick);
+deleteExpenseButton2.addEventListener("click", handleDeleteExpenseClick);
+
+const handleDeleteExpenseSaveClick = () => {
+  const deleteExpenseForm = document.getElementById("delete-expense-form");
+  if (deleteExpenseForm != null) {
+    deleteExpenseForm.onsubmit = () => {
+      const formData = new FormData(<HTMLFormElement>deleteExpenseForm);
+      const id = formData.get("delete-expense-id") as string;
+      if (expenseService.deleteExpense(userService.currentUser.id, Number(id))) {
+        console.log("Harcama silme işlemi başarılı.");
+        handleShowExpensesClick();
+        window.location.replace("#show-expenses-page");
+      } else {
+        console.log("Hata: Harcama silme işlemi başarısız.");
+      }
+      return false; // prevent reload
+    };
+  }
+}
+deleteExpenseSaveButton.addEventListener("click", handleDeleteExpenseSaveClick);
+
 const handleShowCategoriesClick = () => {
   window.location.replace("#show-categories-page");
   showUserExpenseCategories("#show-categories-list");
 };
 showCategoriesButton.addEventListener("click", handleShowCategoriesClick);
+
+const handleAddCategoryClick = () => {
+  window.location.replace("#add-category-page");
+};
+addCategoryButton.addEventListener("click", handleAddCategoryClick);
+addCategoryButton2.addEventListener("click", handleAddCategoryClick);
 
 const handleAddCategorySaveClick = () => {
   const addCategoryForm = document.getElementById("add-category-form");
