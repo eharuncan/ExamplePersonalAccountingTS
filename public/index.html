@@ -26,7 +26,7 @@
         <a href="#delete-user-page">Kullanıcı Sil</a>
       </div>
       <div id="expenses-menu" class="dropdown">
-        <a class="dropbtn" href="#show-expenses-page">Harcamalarım</a>
+        <a id="show-expenses-button" class="dropbtn" href="#show-expenses-page">Harcamalarım</a>
         <div class="dropdown-content">
           <a id="add-expense-button" href="#add-expense-page">Ekle</a>
           <a href="#edit-expense-page">Düzenle</a>
@@ -119,27 +119,8 @@
   <section id="show-expenses-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/expenses-bg.jpg');"></div>
     <div class="page-content">
-      <div class="data-grid-5-column">
-
-        <div>Harcama ID</div>
-        <div>Adı</div>
-        <div>Miktarı</div>
-        <div>Tarihi</div>
-        <div>Kategorisi</div>
-
-
-        <div>1</div>
-        <div>Harcama 1</div>
-        <div>100</div>
-        <div>21.10.2022</div>
-        <div>Kategori 1</div>
-
-        <div>2</div>
-        <div>Harcama 2</div>
-        <div>200</div>
-        <div>22.10.2022</div>
-        <div>Kategori 2</div>
-
+      <div id="show-expenses-list" class="data-grid-5-column">
+        <!-- user expenses list -->
       </div>
       <div class="page-menu">
         <a id="add-expense-button2" class="button button-green" href="#add-expense-page">Ekle</a>

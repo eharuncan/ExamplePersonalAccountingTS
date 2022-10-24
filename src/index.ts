@@ -58,6 +58,7 @@ startServices(database);
 
 const registerButton = <HTMLButtonElement>document.querySelector("#register-button");
 const loginButton = <HTMLButtonElement>document.querySelector("#login-button");
+const showExpensesButton = <HTMLButtonElement>document.querySelector("#show-expenses-button");
 const addExpenseButton = <HTMLButtonElement>document.querySelector("#add-expense-button");
 const addExpenseButton2 = <HTMLButtonElement>document.querySelector("#add-expense-button2");
 const addExpenseSaveButton = <HTMLButtonElement>document.querySelector("#add-expense-save-button");
@@ -167,29 +168,83 @@ function removeAllChildNodes(parent: HTMLDivElement) {
   }
 }
 
+function showUserExpenses(elementId: string){
+  const userExpensesList = <HTMLDivElement>document.querySelector(elementId);
+  removeAllChildNodes(userExpensesList);
+  let userExpenses = expenseService.getExpensesByUserId(userService.currentUser.id);
+
+    let divElementId = document.createElement("div");
+    divElementId.innerText = "Harcama ID";
+    userExpensesList.appendChild(divElementId);
+
+    let divElementName = document.createElement("div");
+    divElementName.innerText = "Adı";
+    userExpensesList.appendChild(divElementName);
+
+    let divElementAmount = document.createElement("div");
+    divElementAmount.innerText = "Miktarı";
+    userExpensesList.appendChild(divElementAmount);
+
+    let divElementDate = document.createElement("div");
+    divElementDate.innerText = "Tarihi";
+    userExpensesList.appendChild(divElementDate);
+
+    let divElementCategory = document.createElement("div");
+    divElementCategory.innerText = "Kategorisi";
+    userExpensesList.appendChild(divElementCategory);
+
+  for (let index = 0; index < userExpenses.length; index++) {
+    let divElementId = document.createElement("div");
+    divElementId.innerText = userExpenses[index].id.toString();
+    userExpensesList.appendChild(divElementId);
+
+    let divElementName = document.createElement("div");
+    divElementName.innerText = userExpenses[index].name;
+    userExpensesList.appendChild(divElementName);
+
+    let divElementAmount = document.createElement("div");
+    divElementAmount.innerText = userExpenses[index].amount.toString();
+    userExpensesList.appendChild(divElementAmount);
+
+    let divElementDate = document.createElement("div");
+    divElementDate.innerText = userExpenses[index].date.toString();
+    userExpensesList.appendChild(divElementDate);
+
+    let divElementCategory = document.createElement("div");
+    divElementCategory.innerText = expenseCategoryService.getExpenseCategoryByUserIdAndExpenseCategoryId(userService.currentUser.id, userExpenses[index].categoryId).name;
+    userExpensesList.appendChild(divElementCategory);
+  }
+}
+
 function showUserExpenseCategories(elementId: string){
-  const addExpenseShowCategoriesList = <HTMLDivElement>document.querySelector(elementId);
-  removeAllChildNodes(addExpenseShowCategoriesList);
+  const userCategoriesList = <HTMLDivElement>document.querySelector(elementId);
+  removeAllChildNodes(userCategoriesList);
   let userCategories = expenseCategoryService.getExpenseCategoriesByUserId(userService.currentUser.id);
 
     let divElementId = document.createElement("div");
     divElementId.innerText = "Kategori ID";
-    addExpenseShowCategoriesList.appendChild(divElementId);
+    userCategoriesList.appendChild(divElementId);
 
     let divElementName = document.createElement("div");
     divElementName.innerText = "Adı";
-    addExpenseShowCategoriesList.appendChild(divElementName);
+    userCategoriesList.appendChild(divElementName);
 
   for (let index = 0; index < userCategories.length; index++) {
     let divElementId = document.createElement("div");
     divElementId.innerText = userCategories[index].id.toString();
-    addExpenseShowCategoriesList.appendChild(divElementId);
+    userCategoriesList.appendChild(divElementId);
 
     let divElementName = document.createElement("div");
     divElementName.innerText = userCategories[index].name;
-    addExpenseShowCategoriesList.appendChild(divElementName);
+    userCategoriesList.appendChild(divElementName);
   }
 }
+
+const handleShowExpensesClick = () => {
+  window.location.replace("#show-expenses-page");
+  showUserExpenses("#show-expenses-list");
+};
+showExpensesButton.addEventListener("click", handleShowExpensesClick);
 
 const handleAddExpenseClick = () => {
   window.location.replace("#add-expense-page");
@@ -213,6 +268,7 @@ const handleAddExpenseSaveClick = () => {
       const categoryId = formData.get("add-expense-category") as string;
       if (expenseService.addExpense(userService.currentUser.id, name, BigInt(amount), new Date(date), Number(categoryId))) {
         console.log("Harcama ekleme işlemi başarılı.");
+        handleShowExpensesClick();
         window.location.replace("#show-expenses-page");
       } else {
         console.log("Hata: Harcama ekleme işlemi başarısız.");
