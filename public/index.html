@@ -18,7 +18,7 @@
     <div class="navbar">
       <a href="#">Anasayfa</a>
       <div class="dropdown">
-        <a href="#home" class="dropbtn">Harcamalarım</a>
+        <a href="#data-show-page" class="dropbtn">Harcamalarım</a>
         <div class="dropdown-content">
           <a href="#home">Ekle</a>
           <a href="#home">Düzenle</a>
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="dropdown">
-        <a href="#home" class="dropbtn">Kategorilerim</a>
+        <a href="#data-show-page" class="dropbtn">Kategorilerim</a>
         <div class="dropdown-content">
           <a href="#home">Ekle</a>
           <a href="#home">Düzenle</a>
@@ -44,32 +44,88 @@
   </header>
 
   <div id="register-page" class="page">
-    <div id="register-bg" style="background-image: url('/public/assets/background.jpg');"></div>
-    <div class="login-page">
-      <div class="form">
-        <form class="register-form">
-          <input type="text" placeholder="Adınız" />
-          <input type="text" placeholder="Soyadınız" />
-          <input type="text" placeholder="Eposta adresiniz" />
-          <input type="password" placeholder="Şifreniz" />
-          <button>Kaydol</button>
-          <p class="message">Kayıtlı mısın? <a href="#login-page">Giriş Yap</a></p>
-        </form>
+    <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
+    <div class="page-content">
+      <div class="register-login-page">
+        <div class="form">
+          <form class="register-form">
+            <input type="text" placeholder="Adınız" />
+            <input type="text" placeholder="Soyadınız" />
+            <input type="text" placeholder="Eposta adresiniz" />
+            <input type="password" placeholder="Şifreniz" />
+            <input type="password" placeholder="Şifrenizi tekrar giriniz" />
+            <button>Kaydol</button>
+            <p class="message">Kayıtlı mısın? <a href="#login-page">Giriş Yap</a></p>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 
   <div id="login-page" class="page">
-    <div id="login-bg" style="background-image: url('/public/assets/background.jpg');"></div>
-    <div class="login-page">
-      <div class="form">
-        <form class="login-form">
-          <input type="text" placeholder="Eposta adresiniz" />
-          <input type="password" placeholder="Şifreniz" />
-          <button>Giriş Yap</button>
-          <p class="message">Kayıtlı değil misin? <a href="#register-page">Hesap Oluştur</a></p>
-        </form>
+    <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
+    <div class="page-content">
+      <div class="register-login-page">
+        <div class="form">
+          <form class="login-form">
+            <input type="text" placeholder="Eposta adresiniz" />
+            <input type="password" placeholder="Şifreniz" />
+            <button>Giriş Yap</button>
+            <p class="message">Kayıtlı değil misin? <a href="#register-page">Hesap Oluştur</a></p>
+          </form>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <div id="data-show-page" class="page">
+    <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
+    <div class="page-content">
+      <div class="data-grid">
+
+        <div>Row 1</div>
+        <div>1.00</div>
+        <div>Description</div>
+
+        <div>Row 2</div>
+        <div>2.00</div>
+        <div>A description</div>
+
+        <div>Row 3</div>
+        <div>3.00</div>
+        <div>Very long description that will wrap over to the next line without affecting the width of other columns in
+          the table.</div>
+
+        <div>Row 4 too long for the first column</div>
+        <div>4.00</div>
+        <div>Longer description</div>
+
+        <div>Row 5</div>
+        <div>Too long for the second column</div>
+        <div>Another description</div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="data-add-page" class="page">
+    <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
+    <div class="page-content">
+
+    </div>
+  </div>
+
+  <div id="data-edit-page" class="page">
+    <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
+    <div class="page-content">
+
+    </div>
+  </div>
+
+  <div id="data-remove-page" class="page">
+    <div class="page-background" style="background-image: url('/public/assets/background.jpg');"></div>
+    <div class="page-content">
+
     </div>
   </div>
 
