@@ -14,14 +14,12 @@ export class ExpenseService {
     }
 
     public getExpensesByUserId(userId: number): Array<Expense> {
-        const resultList = this.expenseListDB
-            .filter((expense) => { expense.userId === userId });
+        let resultList = this.expenseListDB.filter((expense) => expense.userId === userId);
         return resultList;
     }
 
     public getExpenseByUserIdAndExpenseId(userId: number, expenseId: number): Expense {
-        const resultList = this.expenseListDB
-            .filter((expense) => { expense.userId === userId && expense.id === expenseId });
+        let resultList = this.expenseListDB.filter((expense) => expense.userId === userId && expense.id === expenseId);
         return resultList[0];
     }
 
@@ -58,7 +56,7 @@ export class ExpenseService {
 
     public deleteExpense(userId: number, expenseId: number): boolean {
         let foundExpense = this.getExpenseByUserIdAndExpenseId(userId, expenseId);
-        const index = this.expenseListDB.indexOf(foundExpense, 0);
+        let index = this.expenseListDB.indexOf(foundExpense, 0);
         if (index > -1) {
             this.expenseListDB.splice(index, 1);
         }
@@ -78,13 +76,12 @@ export class ExpenseService {
 
         let currentUsersExpenseList = this.getExpensesByUserId(userId);
 
-        const resultList = currentUsersExpenseList
-            .filter(
-                (expense) => {
+        let resultList = currentUsersExpenseList.filter(
+                (expense) =>
                     moment(expense.date).year() == year &&
                     moment(expense.date).month() == month &&
                     moment(expense.date).day() == day
-            });
+            );
 
         let sum = BigInt(0);
         resultList.forEach((expense) => {
@@ -100,12 +97,11 @@ export class ExpenseService {
 
         let currentUsersExpenseList = this.getExpensesByUserId(userId);
 
-        const resultList = currentUsersExpenseList
-            .filter(
-                (expense) => {
+        let resultList = currentUsersExpenseList.filter(
+                (expense) =>
                 moment(expense.date).year() == year &&
                 moment(expense.date).month() == month
-            });
+        );
 
         let sum = BigInt(0);
         resultList.forEach((expense) => {
@@ -120,11 +116,10 @@ export class ExpenseService {
 
         let currentUsersExpenseList = this.getExpensesByUserId(userId);
 
-        const resultList = currentUsersExpenseList
-            .filter(
-                (expense) => {
+        let resultList = currentUsersExpenseList.filter(
+                (expense) =>
                 moment(expense.date).year() == year
-            });
+        );
 
         let sum = BigInt(0);
         resultList.forEach((expense) => {

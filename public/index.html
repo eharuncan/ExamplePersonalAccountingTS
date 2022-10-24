@@ -17,39 +17,45 @@
   <header class="header">
     <div class="navbar">
       <a href="#main-page">Anasayfa</a>
-      <div class="dropdown">
-        <a href="#show-expenses-page" class="dropbtn">Harcamalarım</a>
+      <div id="expenses-menu" class="dropdown">
+        <a class="dropbtn" href="#show-expenses-page">Harcamalarım</a>
         <div class="dropdown-content">
           <a href="#add-expense-page">Ekle</a>
           <a href="#edit-expense-page">Düzenle</a>
           <a href="#delete-expense-page">Sil</a>
         </div>
       </div>
-      <div class="dropdown">
-        <a href="#show-categories-page" class="dropbtn">Kategorilerim</a>
+      <div id="categories-menu" class="dropdown">
+        <a class="dropbtn" href="#show-categories-page">Kategorilerim</a>
         <div class="dropdown-content">
           <a href="#add-category-page">Ekle</a>
           <a href="#edit-category-page">Düzenle</a>
           <a href="#delete-category-page">Sil</a>
         </div>
       </div>
-      <div class="dropdown">
-        <a href="#show-profile-page" class="dropbtn">Profilim</a>
+      <div id="login-menu">
+        <a href="#login-page">Oturum Aç</a>
+      </div>
+      <div id="register-menu">
+        <a href="#register-page">Kaydol</a>
+      </div>
+      <div id="profile-menu" class="dropdown">
+        <a id="profile-button" class="dropbtn" href="#show-profile-page">Profilim</a>
         <div class="dropdown-content">
           <a href="#edit-profile-page">Düzenle</a>
         </div>
       </div>
-      <a href="#login-page">Oturum Aç</a>
-      <a href="#register-page">Kaydol</a>
-      <a href="#main-page">Oturumu Kapat</a>
+      <div id="logout-menu">
+        <a id="logout-button" href="#main-page">Oturumu Kapat</a>
+      </div>
     </div>
   </header>
 
   <div id="main-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/main-bg.jpg');"></div>
     <div class="page-content">
-        <h3 class="animate-character"> HOŞGELDİNİZ</h3>
-        <a href="#register-page" class="button button-green">Şimdi Kaydolun!</a>
+      <h3 class="animate-character"> HOŞGELDİNİZ</h3>
+      <a class="button button-green" href="#register-page">Şimdi Kaydolun!</a>
     </div>
   </div>
 
@@ -64,7 +70,7 @@
             <input type="text" name="userEmail" placeholder="Eposta adresiniz" />
             <input type="password" name="userPassword" placeholder="Şifreniz" />
             <input type="password" name="userRetypedPassword" placeholder="Şifrenizi tekrar giriniz" />
-            <input type="submit" value="Kaydol" href="#show-expenses-page" class="button button-green"/>
+            <input id="register-button" class="button button-green" type="submit" value="Kaydol" />
             <p class="message">Kayıtlı mısın? <a href="#login-page">Oturum Aç</a></p>
           </form>
         </div>
@@ -77,10 +83,10 @@
     <div class="page-content">
       <div class="input-page">
         <div class="form">
-          <form>
-            <input type="text" placeholder="Eposta adresiniz" />
-            <input type="password" placeholder="Şifreniz" />
-            <a href="#show-expenses-page" class="button button-green">Oturum Aç</a>
+          <form id="login-form">
+            <input type="text" name="userEmail" placeholder="Eposta adresiniz" />
+            <input type="password" name="userPassword" placeholder="Şifreniz" />
+            <input id="login-button" class="button button-green" type="submit" value="Oturum Aç" />
             <p class="message">Kayıtlı değil misin? <a href="#register-page">Hesap Oluştur</a></p>
           </form>
         </div>
@@ -99,7 +105,7 @@
         <div>Tarihi</div>
         <div>Kategorisi</div>
 
-        
+
         <div>1</div>
         <div>Harcama 1</div>
         <div>100</div>
@@ -114,9 +120,9 @@
 
       </div>
       <div class="page-menu">
-        <a href="#add-expense-page" class="button button-green">Ekle</a>
-        <a href="#edit-expense-page" class="button button-yellow">Düzenle</a>
-        <a href="#delete-expense-page" class="button button-red">Sil</a>
+        <a class="button button-green" href="#add-expense-page">Ekle</a>
+        <a class="button button-yellow" href="#edit-expense-page">Düzenle</a>
+        <a class="button button-red" href="#delete-expense-page">Sil</a>
       </div>
     </div>
   </section>
@@ -131,7 +137,7 @@
             <input type="text" placeholder="Miktarı" />
             <input type="text" placeholder="Tarihi" />
             <input type="text" placeholder="Kategori" />
-            <a href="#show-expenses-page" class="button button-green">Kaydet</a>
+            <a class="button button-green" href="#show-expenses-page">Kaydet</a>
           </form>
         </div>
       </div>
@@ -169,7 +175,7 @@
             <input type="text" placeholder="Miktarı" />
             <input type="text" placeholder="Tarihi" />
             <input type="text" placeholder="Kategori" />
-            <a href="#show-expenses-page"  class="button button-green">Kaydet</a>
+            <a class="button button-green" href="#show-expenses-page">Kaydet</a>
           </form>
         </div>
       </div>
@@ -204,7 +210,7 @@
         <div class="form">
           <form class="login-form">
             <input type="text" placeholder="Silinecek Harcama ID" />
-            <a href="#show-expenses-page"  class="button button-red">Sil</a>
+            <a class="button button-red" href="#show-expenses-page">Sil</a>
           </form>
         </div>
       </div>
@@ -227,9 +233,9 @@
 
       </div>
       <div class="page-menu">
-        <a href="#add-category-page" class="button button-green">Ekle</a>
-        <a href="#edit-category-page" class="button button-yellow">Düzenle</a>
-        <a href="#delete-category-page" class="button button-red">Sil</a>
+        <a class="button button-green" href="#add-category-page">Ekle</a>
+        <a class="button button-yellow" href="#edit-category-page">Düzenle</a>
+        <a class="button button-red" href="#delete-category-page">Sil</a>
       </div>
     </div>
   </section>
@@ -241,7 +247,7 @@
         <div class="form">
           <form class="login-form">
             <input type="text" placeholder="Kategori adı" />
-            <a href="#show-categories-page" class="button button-green">Kaydet</a>
+            <a class="button button-green" href="#show-categories-page">Kaydet</a>
           </form>
         </div>
       </div>
@@ -267,7 +273,7 @@
         <div class="form">
           <form class="login-form">
             <input type="text" placeholder="Kategori adı" />
-            <a href="#show-categories-page"  class="button button-green">Kaydet</a>
+            <a class="button button-green" href="#show-categories-page">Kaydet</a>
           </form>
         </div>
       </div>
@@ -293,7 +299,7 @@
         <div class="form">
           <form class="login-form">
             <input type="text" placeholder="Silinecek Kategori ID" />
-            <a href="#show-categories-page"  class="button button-red">Sil</a>
+            <a class="button button-red" href="#show-categories-page">Sil</a>
           </form>
         </div>
       </div>
@@ -305,18 +311,18 @@
     <div class="page-content">
       <div class="data-grid-2-column-reverse">
 
-        <div>Adınız:</div>
-        <div>Harun</div>
+          <div>Adınız:</div>
+          <div id="show-profile-name">Harun</div>
 
-        <div>Soyadınız:</div>
-        <div>Can</div>
+          <div>Soyadınız:</div>
+          <div id="show-profile-surname">Can</div>
 
-        <div>Eposta Adresiniz:</div>
-        <div>eharuncan@gmail.com</div>
+          <div>Eposta Adresiniz:</div>
+          <div id="show-profile-email">eharuncan@gmail.com</div>
 
       </div>
       <div class="page-menu">
-        <a href="#edit-profile-page" class="button button-yellow">Profilini Düzenle</a>
+        <a class="button button-yellow" href="#edit-profile-page">Profilini Düzenle</a>
       </div>
     </div>
   </section>
@@ -337,7 +343,7 @@
 
       </div>
       <div class="page-menu">
-        <a href="#show-profile-page" class="button button-green">Kaydet</a>
+        <a class="button button-green" href="#show-profile-page">Kaydet</a>
       </div>
     </div>
   </section>

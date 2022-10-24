@@ -13,7 +13,7 @@ export class UserService {
         this.register("admin", "admin", "admin", "admin", "admin");
         this.register("customer1", "customer1", "1", "1", "1");
 
-        this._currentUser = null as any;;
+        this._currentUser = null as any;
     }
 
     public getUsers(): Array<User> {
@@ -21,21 +21,19 @@ export class UserService {
     }
 
     public getUserById(userId: number): User {
-        const resultList = this.userListDB
-            .filter((user) => { user.id === userId });
+        let resultList = this.userListDB.filter((user) => user.id == userId);
         return resultList[0];
     }
 
     public getUserByEmailAndPassword(email: string, password: string): User {
-        const resultList = this.userListDB
-            .filter((user) => { user.email === email && user.password === password });
+        let resultList = this.userListDB.filter((user) => user.email == email && user.password == password );
         return resultList[0];
     }
 
     public register(name: string, surname: string, email: string, password: string, retypedPassword: string): boolean {
 
         if(!this.checkPasswords(password, retypedPassword)){
-            console.log("Hata: Şifreler Uyuşmuyor");
+            console.log("Hata: Şifreler uyuşmuyor.");
             return false;
         }
         let newUserId;
@@ -62,6 +60,7 @@ export class UserService {
 
         this.userListDB.push(user);
         this.currentUser = user;
+        console.log(this.currentUser);
         return true;
 
     }
@@ -77,7 +76,7 @@ export class UserService {
             return false;
         } else {
             let foundUser = this.getUserById(userId);
-            const index = this.userListDB.indexOf(foundUser, 0);
+            let index = this.userListDB.indexOf(foundUser, 0);
             if (index > -1) {
                 this.userListDB.splice(index, 1);
             }
@@ -88,6 +87,7 @@ export class UserService {
     public login(email: string, password: string): boolean {
         if (this.checkUser(email, password)) {
             this.currentUser = this.getUserByEmailAndPassword(email, password);
+            console.log(this.currentUser);
             return true;
         } else {
             return false;
@@ -109,13 +109,13 @@ export class UserService {
     }
 
     public checkUser(email: string, password: string): boolean {
-        const resultList = this.userListDB
-            .filter((user) => { user.email === email && user.password === password });
-        if (resultList.length === 0) {
+        let resultList = this.userListDB.filter((user) => user.email == email && user.password == password );
+        if (resultList.length == 0) {
+            console.log("Hata: Sistemde kayıtlı böyle bir kullanıcı yok.")
             return false;
         } else {
             return true;
-        }
+        }     
     }
 
     get currentUser(): User {
