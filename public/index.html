@@ -34,11 +34,11 @@
         </div>
       </div>
       <div id="categories-menu" class="dropdown">
-        <a class="dropbtn" href="#show-categories-page">Kategorilerim</a>
+        <a id="show-categories-button" class="dropbtn" href="#show-categories-page">Kategorilerim</a>
         <div class="dropdown-content">
-          <a href="#add-category-page">Ekle</a>
-          <a href="#edit-category-page">Düzenle</a>
-          <a href="#delete-category-page">Sil</a>
+          <a id="add-category-button" href="#add-category-page">Ekle</a>
+          <a id="edit-category-button" href="#edit-category-page">Düzenle</a>
+          <a id="delete-category-button" href="#delete-category-page">Sil</a>
         </div>
       </div>
       <div id="login-menu">
@@ -159,10 +159,7 @@
             <input name ="add-expense-amount" type="text" placeholder="Miktarı" />
             <input id="add-expense-date" name ="add-expense-date" type="text" placeholder="Tarihi" />
             <div id="add-expense-show-categories-list" class="data-grid-2-column">
-
-              <div>Kategori ID</div>
-              <div>Adı</div>
-      
+              <!-- user expense categories list -->
             </div>
             <input name ="add-expense-category" type="text" placeholder="Listedeki Kategori ID giriniz" />
             <input id="add-expense-save-button" class="button button-green" type="submit" value="Kaydet" />
@@ -198,7 +195,7 @@
       </div>
       <div class="input-page">
         <div class="form">
-          <form class="login-form">
+          <form id="xxx-form">
             <input type="text" placeholder="Harcama adı" />
             <input type="text" placeholder="Miktarı" />
             <input type="text" placeholder="Tarihi" />
@@ -236,7 +233,7 @@
       </div>
       <div class="input-page">
         <div class="form">
-          <form class="login-form">
+          <form id="xxx-form">
             <input type="text" placeholder="Silinecek Harcama ID" />
             <a class="button button-red" href="#show-expenses-page">Sil</a>
           </form>
@@ -248,22 +245,13 @@
   <section id="show-categories-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/categories-bg.jpg');"></div>
     <div class="page-content">
-      <div class="data-grid-2-column">
-
-        <div>Kategori ID</div>
-        <div>Adı</div>
-
-        <div>1</div>
-        <div>Kategori 1</div>
-
-        <div>2</div>
-        <div>Kategori 2</div>
-
+      <div id="show-categories-list" class="data-grid-2-column">
+        <!-- user expense categories list -->
       </div>
       <div class="page-menu">
-        <a class="button button-green" href="#add-category-page">Ekle</a>
-        <a class="button button-yellow" href="#edit-category-page">Düzenle</a>
-        <a class="button button-red" href="#delete-category-page">Sil</a>
+        <input id="add-category-button2" type="button" class="button button-green" value="Ekle"/ş>
+        <input id="edit-category-button2" type="button" class="button button-yellow" value="Düzenle"/>
+        <input id="delete-category-button2" type="button" class="button button-red" value="Sil"/>
       </div>
     </div>
   </section>
@@ -273,9 +261,9 @@
     <div class="page-content">
       <div class="input-page">
         <div class="form">
-          <form class="login-form">
-            <input type="text" placeholder="Kategori adı" />
-            <a class="button button-green" href="#show-categories-page">Kaydet</a>
+          <form id="add-category-form">
+            <input name="show-categories-name" type="text" placeholder="Kategori adı" />
+            <input id="add-category-save-button" class="button button-green" type="submit" value="Kaydet" />
           </form>
         </div>
       </div>
@@ -285,23 +273,15 @@
   <section id="edit-category-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/categories-bg.jpg');"></div>
     <div class="page-content">
-      <div class="data-grid-2-column">
-
-        <div>Kategori ID</div>
-        <div>Adı</div>
-
-        <div>1</div>
-        <div>Kategori 1</div>
-
-        <div>2</div>
-        <div>Kategori 2</div>
-
+      <div id="edit-category-list" class="data-grid-2-column">
+        <!-- user expense categories list -->
       </div>
       <div class="input-page">
         <div class="form">
-          <form class="login-form">
-            <input type="text" placeholder="Kategori adı" />
-            <a class="button button-green" href="#show-categories-page">Kaydet</a>
+          <form id="edit-category-form">
+            <input name="edit-category-id" type="text" placeholder="Kategori ID" />
+            <input name="edit-category-name" type="text" placeholder="Yeni kategori adı" />
+            <input id="edit-category-save-button" class="button button-green" type="submit" value="Kaydet" />
           </form>
         </div>
       </div>
@@ -311,23 +291,14 @@
   <section id="delete-category-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/categories-bg.jpg');"></div>
     <div class="page-content">
-      <div class="data-grid-2-column">
-
-        <div>Kategori ID</div>
-        <div>Adı</div>
-
-        <div>1</div>
-        <div>Kategori 1</div>
-
-        <div>2</div>
-        <div>Kategori 2</div>
-
+      <div id="delete-category-list" class="data-grid-2-column">
+        <!-- user expense categories list -->
       </div>
       <div class="input-page">
         <div class="form">
-          <form class="login-form">
-            <input type="text" placeholder="Silinecek Kategori ID" />
-            <a class="button button-red" href="#show-categories-page">Sil</a>
+          <form id="delete-category-form">
+            <input name="delete-category-id" type="text" placeholder="Silinecek Kategori ID" />
+            <input id="delete-category-save-button" class="button button-red" type="submit" value="Sil" />
           </form>
         </div>
       </div>

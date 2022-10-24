@@ -25,6 +25,7 @@ import { Database } from "./db/database";
 import { ExpenseCategoryService } from "./services/expenseCategoryService";
 import { UserService } from "./services/userService";
 import { ExpenseService } from "./services/expenseService";
+import { JsxAttribute } from "typescript";
 
 export let expenseCategoryService: ExpenseCategoryService;
 export let userService: UserService;
@@ -60,6 +61,14 @@ const loginButton = <HTMLButtonElement>document.querySelector("#login-button");
 const addExpenseButton = <HTMLButtonElement>document.querySelector("#add-expense-button");
 const addExpenseButton2 = <HTMLButtonElement>document.querySelector("#add-expense-button2");
 const addExpenseSaveButton = <HTMLButtonElement>document.querySelector("#add-expense-save-button");
+const showCategoriesButton = <HTMLButtonElement>document.querySelector("#show-categories-button");
+const addCategorySaveButton = <HTMLButtonElement>document.querySelector("#add-category-save-button");
+const editCategorySaveButton = <HTMLButtonElement>document.querySelector("#edit-category-save-button");
+const editCategoryButton = <HTMLButtonElement>document.querySelector("#edit-category-button");
+const editCategoryButton2 = <HTMLButtonElement>document.querySelector("#edit-category-button2");
+const deleteCategoryButton = <HTMLButtonElement>document.querySelector("#delete-category-button");
+const deleteCategoryButton2 = <HTMLButtonElement>document.querySelector("#delete-category-button2");
+const deleteCategorySaveButton = <HTMLButtonElement>document.querySelector("#delete-category-save-button");
 const showProfileButton = <HTMLButtonElement>document.querySelector("#show-profile-button");
 const editProfileButton = <HTMLButtonElement>document.querySelector("#edit-profile-button");
 const editProfileButton2 = <HTMLButtonElement>document.querySelector("#edit-profile-button2");
@@ -152,13 +161,25 @@ const handleLoginClick = () => {
 }
 loginButton.addEventListener("click", handleLoginClick);
 
-const handleAddExpenseClick = () => {
-  window.location.replace("#add-expense-page");
-  const addExpenseDate = <HTMLInputElement>document.querySelector("#add-expense-date");
-  addExpenseDate.setAttribute("value", (new Date(Date.now())).toString());
+function removeAllChildNodes(parent: HTMLDivElement) {
+  while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+  }
+}
 
-  const addExpenseShowCategoriesList = <HTMLDivElement>document.querySelector("#add-expense-show-categories-list");
+function showUserExpenseCategories(elementId: string){
+  const addExpenseShowCategoriesList = <HTMLDivElement>document.querySelector(elementId);
+  removeAllChildNodes(addExpenseShowCategoriesList);
   let userCategories = expenseCategoryService.getExpenseCategoriesByUserId(userService.currentUser.id);
+
+    let divElementId = document.createElement("div");
+    divElementId.innerText = "Kategori ID";
+    addExpenseShowCategoriesList.appendChild(divElementId);
+
+    let divElementName = document.createElement("div");
+    divElementName.innerText = "Adı";
+    addExpenseShowCategoriesList.appendChild(divElementName);
+
   for (let index = 0; index < userCategories.length; index++) {
     let divElementId = document.createElement("div");
     divElementId.innerText = userCategories[index].id.toString();
@@ -168,6 +189,14 @@ const handleAddExpenseClick = () => {
     divElementName.innerText = userCategories[index].name;
     addExpenseShowCategoriesList.appendChild(divElementName);
   }
+}
+
+const handleAddExpenseClick = () => {
+  window.location.replace("#add-expense-page");
+  const addExpenseDate = <HTMLInputElement>document.querySelector("#add-expense-date");
+  addExpenseDate.setAttribute("value", (new Date(Date.now())).toString());
+
+  showUserExpenseCategories("#add-expense-show-categories-list");
   
 };
 addExpenseButton.addEventListener("click", handleAddExpenseClick);
@@ -184,7 +213,6 @@ const handleAddExpenseSaveClick = () => {
       const categoryId = formData.get("add-expense-category") as string;
       if (expenseService.addExpense(userService.currentUser.id, name, BigInt(amount), new Date(date), Number(categoryId))) {
         console.log("Harcama ekleme işlemi başarılı.");
-        refreshMenus();
         window.location.replace("#show-expenses-page");
       } else {
         console.log("Hata: Harcama ekleme işlemi başarısız.");
@@ -195,6 +223,84 @@ const handleAddExpenseSaveClick = () => {
   }
 };
 addExpenseSaveButton.addEventListener("click", handleAddExpenseSaveClick);
+
+const handleShowCategoriesClick = () => {
+  window.location.replace("#show-categories-page");
+  showUserExpenseCategories("#show-categories-list");
+};
+showCategoriesButton.addEventListener("click", handleShowCategoriesClick);
+
+const handleAddCategorySaveClick = () => {
+  const addCategoryForm = document.getElementById("add-category-form");
+  if (addCategoryForm != null) {
+    addCategoryForm.onsubmit = () => {
+      const formData = new FormData(<HTMLFormElement>addCategoryForm);
+      const name = formData.get("show-categories-name") as string;
+      if (expenseCategoryService.addExpenseCategory(userService.currentUser.id, name)) {
+        console.log("Kategori ekleme işlemi başarılı.");
+        handleShowCategoriesClick();
+      } else {
+        console.log("Hata: Kategori ekleme işlemi başarısız.");
+      }
+
+      return false; // prevent reload
+    };
+  }
+};
+addCategorySaveButton.addEventListener("click", handleAddCategorySaveClick);
+
+const handleEditCategoryClick = () => {
+  showUserExpenseCategories("#edit-category-list")
+  window.location.replace("#edit-category-page");
+}
+editCategoryButton.addEventListener("click", handleEditCategoryClick);
+editCategoryButton2.addEventListener("click", handleEditCategoryClick);
+
+const handleEditCategorySaveClick = () => {
+  const editCategoryForm = document.getElementById("edit-category-form");
+  if (editCategoryForm != null) {
+    editCategoryForm.onsubmit = () => {
+      const formData = new FormData(<HTMLFormElement>editCategoryForm);
+      const id = formData.get("edit-category-id") as string;
+      const editedName = formData.get("edit-category-name") as string;
+      if (expenseCategoryService.editExpenseCategory(userService.currentUser.id, Number(id), editedName)) {
+        console.log("Kategori güncelleme işlemi başarılı.");
+        handleShowCategoriesClick();
+        window.location.replace("#show-categories-page");
+      } else {
+        console.log("Hata: Kategori güncelleme işlemi başarısız.");
+      }
+      return false; // prevent reload
+    };
+  }
+}
+editCategorySaveButton.addEventListener("click", handleEditCategorySaveClick);
+
+const handleDeleteCategoryClick = () => {
+  showUserExpenseCategories("#delete-category-list")
+  window.location.replace("#delete-category-page");
+}
+deleteCategoryButton.addEventListener("click", handleDeleteCategoryClick);
+deleteCategoryButton2.addEventListener("click", handleDeleteCategoryClick);
+
+const handleDeleteCategorySaveClick = () => {
+  const deleteCategoryForm = document.getElementById("delete-category-form");
+  if (deleteCategoryForm != null) {
+    deleteCategoryForm.onsubmit = () => {
+      const formData = new FormData(<HTMLFormElement>deleteCategoryForm);
+      const id = formData.get("delete-category-id") as string;
+      if (expenseCategoryService.deleteExpenseCategory(userService.currentUser.id, Number(id))) {
+        console.log("Kategori silme işlemi başarılı.");
+        handleShowCategoriesClick();
+        window.location.replace("#show-categories-page");
+      } else {
+        console.log("Hata: Kategori silme işlemi başarısız.");
+      }
+      return false; // prevent reload
+    };
+  }
+}
+deleteCategorySaveButton.addEventListener("click", handleDeleteCategorySaveClick);
 
 const handleShowProfileClick = () => {
   const showProfileName = <HTMLDivElement>document.querySelector("#show-profile-name");
@@ -238,7 +344,6 @@ const handleEditProfileSaveClick = () => {
       return false; // prevent reload
     };
   }
-
 }
 editProfileSaveButton.addEventListener("click", handleEditProfileSaveClick);
 
