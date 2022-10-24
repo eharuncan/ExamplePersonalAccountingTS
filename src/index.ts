@@ -157,11 +157,17 @@ const handleAddExpenseClick = () => {
   const addExpenseDate = <HTMLInputElement>document.querySelector("#add-expense-date");
   addExpenseDate.setAttribute("value", (new Date(Date.now())).toString());
 
-  // const addExpenseShowCategoriesList = <HTMLDivElement>document.querySelector("#add-expense-show-categories-list");
-  // for (let index = 0; index < userService.currentUser.length; index++) {
-  //   addExpenseShowCategoriesList.appendChild(document.createElement("div",{innerText:  } ))
-    
-  // }
+  const addExpenseShowCategoriesList = <HTMLDivElement>document.querySelector("#add-expense-show-categories-list");
+  let userCategories = expenseCategoryService.getExpenseCategoriesByUserId(userService.currentUser.id);
+  for (let index = 0; index < userCategories.length; index++) {
+    let divElementId = document.createElement("div");
+    divElementId.innerText = userCategories[index].id.toString();
+    addExpenseShowCategoriesList.appendChild(divElementId);
+
+    let divElementName = document.createElement("div");
+    divElementName.innerText = userCategories[index].name;
+    addExpenseShowCategoriesList.appendChild(divElementName);
+  }
   
 };
 addExpenseButton.addEventListener("click", handleAddExpenseClick);
