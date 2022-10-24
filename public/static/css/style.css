@@ -249,6 +249,20 @@ input {
   background: #333;
 }
 
+.data-grid-4-column {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+.data-grid-4-column>div {
+  margin: 2px;
+  background: rgb(255, 255, 255);
+  padding: 5px;
+}
+.data-grid-4-column>div:nth-child(1),.data-grid-4-column>div:nth-child(2),.data-grid-4-column>div:nth-child(3),.data-grid-4-column>div:nth-child(4){
+  color: rgb(255, 255, 255);
+  background: #333;
+}
+
 .data-grid-5-column {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
