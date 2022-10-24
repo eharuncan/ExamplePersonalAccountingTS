@@ -25,6 +25,7 @@ import { Database } from "./db/database";
 import { ExpenseCategoryService } from "./services/expenseCategoryService";
 import { UserService } from "./services/userService";
 import { ExpenseService } from "./services/expenseService";
+import { JsxAttribute } from "typescript";
 
 export let expenseCategoryService: ExpenseCategoryService;
 export let userService: UserService;
@@ -61,6 +62,7 @@ const addExpenseButton = <HTMLButtonElement>document.querySelector("#add-expense
 const addExpenseButton2 = <HTMLButtonElement>document.querySelector("#add-expense-button2");
 const addExpenseSaveButton = <HTMLButtonElement>document.querySelector("#add-expense-save-button");
 const showCategoriesButton = <HTMLButtonElement>document.querySelector("#show-categories-button");
+const addCategorySaveButton = <HTMLButtonElement>document.querySelector("#add-category-save-button");
 const showProfileButton = <HTMLButtonElement>document.querySelector("#show-profile-button");
 const editProfileButton = <HTMLButtonElement>document.querySelector("#edit-profile-button");
 const editProfileButton2 = <HTMLButtonElement>document.querySelector("#edit-profile-button2");
@@ -153,9 +155,25 @@ const handleLoginClick = () => {
 }
 loginButton.addEventListener("click", handleLoginClick);
 
+function removeAllChildNodes(parent: HTMLDivElement) {
+  while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+  }
+}
+
 function showUserExpenseCategories(elementId: string){
   const addExpenseShowCategoriesList = <HTMLDivElement>document.querySelector(elementId);
+  removeAllChildNodes(addExpenseShowCategoriesList);
   let userCategories = expenseCategoryService.getExpenseCategoriesByUserId(userService.currentUser.id);
+
+    let divElementId = document.createElement("div");
+    divElementId.innerText = "Kategori ID";
+    addExpenseShowCategoriesList.appendChild(divElementId);
+
+    let divElementName = document.createElement("div");
+    divElementName.innerText = "Adı";
+    addExpenseShowCategoriesList.appendChild(divElementName);
+
   for (let index = 0; index < userCategories.length; index++) {
     let divElementId = document.createElement("div");
     divElementId.innerText = userCategories[index].id.toString();
@@ -189,7 +207,6 @@ const handleAddExpenseSaveClick = () => {
       const categoryId = formData.get("add-expense-category") as string;
       if (expenseService.addExpense(userService.currentUser.id, name, BigInt(amount), new Date(date), Number(categoryId))) {
         console.log("Harcama ekleme işlemi başarılı.");
-        refreshMenus();
         window.location.replace("#show-expenses-page");
       } else {
         console.log("Hata: Harcama ekleme işlemi başarısız.");
@@ -206,6 +223,25 @@ const handleShowCategoriesClick = () => {
   showUserExpenseCategories("#show-categories-list");
 };
 showCategoriesButton.addEventListener("click", handleShowCategoriesClick);
+
+const handleAddCategorySaveClick = () => {
+  const addCategoryForm = document.getElementById("add-category-form");
+  if (addCategoryForm != null) {
+    addCategoryForm.onsubmit = () => {
+      const formData = new FormData(<HTMLFormElement>addCategoryForm);
+      const name = formData.get("show-categories-name") as string;
+      if (expenseCategoryService.addExpenseCategory(userService.currentUser.id, name)) {
+        console.log("Kategori ekleme işlemi başarılı.");
+        handleShowCategoriesClick();
+      } else {
+        console.log("Hata: Kategori ekleme işlemi başarısız.");
+      }
+
+      return false; // prevent reload
+    };
+  }
+};
+addCategorySaveButton.addEventListener("click", handleAddCategorySaveClick);
 
 const handleShowProfileClick = () => {
   const showProfileName = <HTMLDivElement>document.querySelector("#show-profile-name");

@@ -35,6 +35,7 @@ export class ExpenseCategoryService {
         }
 
         let expenseCategory = new ExpenseCategory(userId, newExpenseCategoryId, expenseCategoryName);
+        console.log("expenseCategory", expenseCategory);
         this.expenseCategoryListDB.push(expenseCategory);
         return true;
     }
