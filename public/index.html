@@ -16,23 +16,67 @@
 <body>
   <header class="header">
     <div class="navbar">
-      <a href="#home">Harcamalarım</a>
-      <a href="#news">Kategorilerim</a>
-      <a href="#home">Giriş Yap</a>
-      <a href="#home">Kaydol</a>
+      <div class="dropdown">
+        <a href="#home" class="dropbtn">Harcamalarım</a>
+        <div class="dropdown-content">
+          <a href="#home">Göster</a>
+          <a href="#home">Ekle</a>
+          <a href="#home">Düzenle</a>
+          <a href="#home">Sil</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#home" class="dropbtn">Kategorilerim</a>
+        <div class="dropdown-content">
+          <a href="#home">Göster</a>
+          <a href="#home">Ekle</a>
+          <a href="#home">Düzenle</a>
+          <a href="#home">Sil</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#home" class="dropbtn">Profilim</a>
+        <div class="dropdown-content">
+          <a href="#home">Göster</a>
+          <a href="#home">Düzenle</a>
+        </div>
+      </div>
+      <a href="#login-page">Giriş Yap</a>
+      <a href="#register-page">Kaydol</a>
       <a href="#contact">Oturumu Kapat</a>
     </div>
   </header>
-  <section class="middle-section flex-center">
-    <div class="learn-ts-container">
-      <div class="counter-example flex flex-center">
-        Count: <span id="count-value">0</span><button id="increment">+</button> <button id="decrement">-</button>
+
+  
+
+  <div id="register-page" class="page">
+    <div id="login-bg"></div>
+    <div class="login-page">
+      <div class="form">
+        <form class="register-form">
+          <input type="text" placeholder="Adınız"/>
+          <input type="text" placeholder="Soyadınız"/>
+          <input type="text" placeholder="Eposta adresiniz"/>
+          <input type="password" placeholder="Şifreniz"/>
+          <button>Kaydol</button>
+          <p class="message">Kayıtlı mısın? <a href="#">Giriş Yap</a></p>
+        </form>
       </div>
-      <span class="learn-ts-text"> New to Typescript? </span>
-      <a href="https://www.typescriptlang.org/" target="_blank">
-        <button class="button">Kaydol</button></a>
     </div>
-  </section>
+  </div>
+
+
+<div class="login-page">
+  <div class="form">
+    <form class="login-form">
+      <input type="text" placeholder="Eposta adresiniz"/>
+      <input type="password" placeholder="Şifreniz"/>
+      <button>Giriş Yap</button>
+      <p class="message">Kayıtlı değil misin? <a href="#">Hesap Oluştur</a></p>
+    </form>
+  </div>
+</div>
+
   <footer class="footer">
     2022 Şahsi Muhasebem
   </footer>
