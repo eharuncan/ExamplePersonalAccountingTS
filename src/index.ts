@@ -156,6 +156,13 @@ const handleAddExpenseClick = () => {
   window.location.replace("#add-expense-page");
   const addExpenseDate = <HTMLInputElement>document.querySelector("#add-expense-date");
   addExpenseDate.setAttribute("value", (new Date(Date.now())).toString());
+
+  // const addExpenseShowCategoriesList = <HTMLDivElement>document.querySelector("#add-expense-show-categories-list");
+  // for (let index = 0; index < userService.currentUser.length; index++) {
+  //   addExpenseShowCategoriesList.appendChild(document.createElement("div",{innerText:  } ))
+    
+  // }
+  
 };
 addExpenseButton.addEventListener("click", handleAddExpenseClick);
 addExpenseButton2.addEventListener("click", handleAddExpenseClick);
