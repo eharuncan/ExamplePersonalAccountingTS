@@ -63,6 +63,9 @@ const addExpenseButton2 = <HTMLButtonElement>document.querySelector("#add-expens
 const addExpenseSaveButton = <HTMLButtonElement>document.querySelector("#add-expense-save-button");
 const showCategoriesButton = <HTMLButtonElement>document.querySelector("#show-categories-button");
 const addCategorySaveButton = <HTMLButtonElement>document.querySelector("#add-category-save-button");
+const editCategorySaveButton = <HTMLButtonElement>document.querySelector("#edit-category-save-button");
+const editCategoryButton = <HTMLButtonElement>document.querySelector("#edit-category-button");
+const editCategoryButton2 = <HTMLButtonElement>document.querySelector("#edit-category-button2");
 const showProfileButton = <HTMLButtonElement>document.querySelector("#show-profile-button");
 const editProfileButton = <HTMLButtonElement>document.querySelector("#edit-profile-button");
 const editProfileButton2 = <HTMLButtonElement>document.querySelector("#edit-profile-button2");
@@ -243,6 +246,33 @@ const handleAddCategorySaveClick = () => {
 };
 addCategorySaveButton.addEventListener("click", handleAddCategorySaveClick);
 
+const handleEditCategoryClick = () => {
+  showUserExpenseCategories("#edit-category-list")
+  window.location.replace("#edit-category-page");
+}
+editCategoryButton.addEventListener("click", handleEditCategoryClick);
+editCategoryButton2.addEventListener("click", handleEditCategoryClick);
+
+const handleEditCategorySaveClick = () => {
+  const editCategoryForm = document.getElementById("edit-category-form");
+  if (editCategoryForm != null) {
+    editCategoryForm.onsubmit = () => {
+      const formData = new FormData(<HTMLFormElement>editCategoryForm);
+      const id = formData.get("edit-category-id") as string;
+      const editedName = formData.get("edit-category-name") as string;
+      if (expenseCategoryService.editExpenseCategory(userService.currentUser.id, Number(id), editedName)) {
+        console.log("Kategori güncelleme işlemi başarılı.");
+        handleShowCategoriesClick();
+        window.location.replace("#show-categories-page");
+      } else {
+        console.log("Hata: Kategori güncelleme işlemi başarısız.");
+      }
+      return false; // prevent reload
+    };
+  }
+}
+editCategorySaveButton.addEventListener("click", handleEditCategorySaveClick);
+
 const handleShowProfileClick = () => {
   const showProfileName = <HTMLDivElement>document.querySelector("#show-profile-name");
   const showProfileSurname = <HTMLDivElement>document.querySelector("#show-profile-surname");
@@ -285,7 +315,6 @@ const handleEditProfileSaveClick = () => {
       return false; // prevent reload
     };
   }
-
 }
 editProfileSaveButton.addEventListener("click", handleEditProfileSaveClick);
 

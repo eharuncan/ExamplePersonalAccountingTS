@@ -36,8 +36,8 @@
       <div id="categories-menu" class="dropdown">
         <a id="show-categories-button" class="dropbtn" href="#show-categories-page">Kategorilerim</a>
         <div class="dropdown-content">
-          <a href="#add-category-page">Ekle</a>
-          <a href="#edit-category-page">Düzenle</a>
+          <a id="add-category-button" href="#add-category-page">Ekle</a>
+          <a id="edit-category-button" href="#edit-category-page">Düzenle</a>
           <a href="#delete-category-page">Sil</a>
         </div>
       </div>
@@ -249,8 +249,8 @@
         <!-- user expense categories list -->
       </div>
       <div class="page-menu">
-        <a class="button button-green" href="#add-category-page">Ekle</a>
-        <a class="button button-yellow" href="#edit-category-page">Düzenle</a>
+        <input id="add-category-button2" type="button" class="button button-green" value="Ekle"/ş>
+        <input id="edit-category-button2" type="button" class="button button-yellow" value="Düzenle"/>
         <a class="button button-red" href="#delete-category-page">Sil</a>
       </div>
     </div>
@@ -273,23 +273,15 @@
   <section id="edit-category-page" class="page">
     <div class="page-background" style="background-image: url('/public/assets/categories-bg.jpg');"></div>
     <div class="page-content">
-      <div class="data-grid-2-column">
-
-        <div>Kategori ID</div>
-        <div>Adı</div>
-
-        <div>1</div>
-        <div>Kategori 1</div>
-
-        <div>2</div>
-        <div>Kategori 2</div>
-
+      <div id="edit-category-list" class="data-grid-2-column">
+        <!-- user expense categories list -->
       </div>
       <div class="input-page">
         <div class="form">
-          <form id="xxx-form">
-            <input type="text" placeholder="Kategori adı" />
-            <a class="button button-green" href="#show-categories-page">Kaydet</a>
+          <form id="edit-category-form">
+            <input name="edit-category-id" type="text" placeholder="Kategori ID" />
+            <input name="edit-category-name" type="text" placeholder="Yeni kategori adı" />
+            <input id="edit-category-save-button" class="button button-green" type="submit" value="Kaydet" />
           </form>
         </div>
       </div>

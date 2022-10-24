@@ -2,7 +2,7 @@ import { ExpenseCategory } from "../domain/expenseCategory";
 
 export class ExpenseCategoryService {
     private expenseCategoryListDB: Array<ExpenseCategory>;
-    private defaultExpenseCategories:string[] = ["Çocuk","Güvenlik","Kitap","Sağlık"];
+    private defaultExpenseCategories: string[] = ["Çocuk", "Güvenlik", "Kitap", "Sağlık"];
 
     constructor(expenseCategoryListDB: Array<ExpenseCategory>) {
         this.expenseCategoryListDB = expenseCategoryListDB;
@@ -27,27 +27,25 @@ export class ExpenseCategoryService {
     public addExpenseCategory(userId: number, expenseCategoryName: string): boolean {
         let newExpenseCategoryId;
         let expenseCategoryList = this.getExpenseCategoriesByUserId(userId);
-        if (expenseCategoryList.length == 0){
+        if (expenseCategoryList.length == 0) {
             newExpenseCategoryId = 1;
-        }else {
-            let lastExpenseCategory =  expenseCategoryList[expenseCategoryList.length-1];
+        } else {
+            let lastExpenseCategory = expenseCategoryList[expenseCategoryList.length - 1];
             newExpenseCategoryId = lastExpenseCategory.id + 1;
         }
 
         let expenseCategory = new ExpenseCategory(userId, newExpenseCategoryId, expenseCategoryName);
-        console.log("expenseCategory", expenseCategory);
         this.expenseCategoryListDB.push(expenseCategory);
         return true;
     }
 
-    public editExpenseCategory(expenseCategory: ExpenseCategory, editedExpenseCategory: ExpenseCategory): boolean {
-        if (this.validateExpenseCategory(editedExpenseCategory)) {
-            let index = this.getExpenseCategories().indexOf(expenseCategory);
-            this.expenseCategoryListDB[index] = editedExpenseCategory;
-            return true;
-        } else {
-            return false;
-        }
+    public editExpenseCategory(userId: number, id: number, editedName: string): boolean {
+        let expenseCategory = this.getExpenseCategoryByUserIdAndExpenseCategoryId(userId, id);
+        let index = this.getExpenseCategories().indexOf(expenseCategory);
+        let editedExpenseCategory = new ExpenseCategory(userId, id, editedName);
+        this.expenseCategoryListDB[index] = editedExpenseCategory;
+        console.log("editedExpenseCategory", editedExpenseCategory);
+        return true;
     }
 
     public deleteExpenseCategory(userId: number, expenseCategoryId: number): boolean {
@@ -59,21 +57,16 @@ export class ExpenseCategoryService {
         return true;
     }
 
-    public addDefaultExpenseCategories(userId: number){
+    public addDefaultExpenseCategories(userId: number) {
 
         // for (String expenseCategory:defaultExpenseCategories) {
         //     this.addExpenseCategory(userId,expenseCategory );
         // }
 
         this.defaultExpenseCategories.forEach(expenseCategory => {
-            this.addExpenseCategory(userId,expenseCategory );
-        }); 
+            this.addExpenseCategory(userId, expenseCategory);
+        });
 
-        return true;
-    }
-
-    public validateExpenseCategory(expenseCategory: ExpenseCategory): boolean {
-        //todo: burası yazılacak
         return true;
     }
 }
