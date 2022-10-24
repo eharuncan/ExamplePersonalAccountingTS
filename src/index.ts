@@ -60,6 +60,7 @@ const loginButton = <HTMLButtonElement>document.querySelector("#login-button");
 const addExpenseButton = <HTMLButtonElement>document.querySelector("#add-expense-button");
 const addExpenseButton2 = <HTMLButtonElement>document.querySelector("#add-expense-button2");
 const addExpenseSaveButton = <HTMLButtonElement>document.querySelector("#add-expense-save-button");
+const showCategoriesButton = <HTMLButtonElement>document.querySelector("#show-categories-button");
 const showProfileButton = <HTMLButtonElement>document.querySelector("#show-profile-button");
 const editProfileButton = <HTMLButtonElement>document.querySelector("#edit-profile-button");
 const editProfileButton2 = <HTMLButtonElement>document.querySelector("#edit-profile-button2");
@@ -152,12 +153,8 @@ const handleLoginClick = () => {
 }
 loginButton.addEventListener("click", handleLoginClick);
 
-const handleAddExpenseClick = () => {
-  window.location.replace("#add-expense-page");
-  const addExpenseDate = <HTMLInputElement>document.querySelector("#add-expense-date");
-  addExpenseDate.setAttribute("value", (new Date(Date.now())).toString());
-
-  const addExpenseShowCategoriesList = <HTMLDivElement>document.querySelector("#add-expense-show-categories-list");
+function showUserExpenseCategories(elementId: string){
+  const addExpenseShowCategoriesList = <HTMLDivElement>document.querySelector(elementId);
   let userCategories = expenseCategoryService.getExpenseCategoriesByUserId(userService.currentUser.id);
   for (let index = 0; index < userCategories.length; index++) {
     let divElementId = document.createElement("div");
@@ -168,6 +165,14 @@ const handleAddExpenseClick = () => {
     divElementName.innerText = userCategories[index].name;
     addExpenseShowCategoriesList.appendChild(divElementName);
   }
+}
+
+const handleAddExpenseClick = () => {
+  window.location.replace("#add-expense-page");
+  const addExpenseDate = <HTMLInputElement>document.querySelector("#add-expense-date");
+  addExpenseDate.setAttribute("value", (new Date(Date.now())).toString());
+
+  showUserExpenseCategories("#add-expense-show-categories-list");
   
 };
 addExpenseButton.addEventListener("click", handleAddExpenseClick);
@@ -195,6 +200,12 @@ const handleAddExpenseSaveClick = () => {
   }
 };
 addExpenseSaveButton.addEventListener("click", handleAddExpenseSaveClick);
+
+const handleShowCategoriesClick = () => {
+  window.location.replace("#show-categories-page");
+  showUserExpenseCategories("#show-categories-list");
+};
+showCategoriesButton.addEventListener("click", handleShowCategoriesClick);
 
 const handleShowProfileClick = () => {
   const showProfileName = <HTMLDivElement>document.querySelector("#show-profile-name");
