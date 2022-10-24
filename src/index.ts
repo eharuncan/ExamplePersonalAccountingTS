@@ -66,6 +66,9 @@ const addCategorySaveButton = <HTMLButtonElement>document.querySelector("#add-ca
 const editCategorySaveButton = <HTMLButtonElement>document.querySelector("#edit-category-save-button");
 const editCategoryButton = <HTMLButtonElement>document.querySelector("#edit-category-button");
 const editCategoryButton2 = <HTMLButtonElement>document.querySelector("#edit-category-button2");
+const deleteCategoryButton = <HTMLButtonElement>document.querySelector("#delete-category-button");
+const deleteCategoryButton2 = <HTMLButtonElement>document.querySelector("#delete-category-button2");
+const deleteCategorySaveButton = <HTMLButtonElement>document.querySelector("#delete-category-save-button");
 const showProfileButton = <HTMLButtonElement>document.querySelector("#show-profile-button");
 const editProfileButton = <HTMLButtonElement>document.querySelector("#edit-profile-button");
 const editProfileButton2 = <HTMLButtonElement>document.querySelector("#edit-profile-button2");
@@ -272,6 +275,32 @@ const handleEditCategorySaveClick = () => {
   }
 }
 editCategorySaveButton.addEventListener("click", handleEditCategorySaveClick);
+
+const handleDeleteCategoryClick = () => {
+  showUserExpenseCategories("#delete-category-list")
+  window.location.replace("#delete-category-page");
+}
+deleteCategoryButton.addEventListener("click", handleDeleteCategoryClick);
+deleteCategoryButton2.addEventListener("click", handleDeleteCategoryClick);
+
+const handleDeleteCategorySaveClick = () => {
+  const deleteCategoryForm = document.getElementById("delete-category-form");
+  if (deleteCategoryForm != null) {
+    deleteCategoryForm.onsubmit = () => {
+      const formData = new FormData(<HTMLFormElement>deleteCategoryForm);
+      const id = formData.get("delete-category-id") as string;
+      if (expenseCategoryService.deleteExpenseCategory(userService.currentUser.id, Number(id))) {
+        console.log("Kategori silme işlemi başarılı.");
+        handleShowCategoriesClick();
+        window.location.replace("#show-categories-page");
+      } else {
+        console.log("Hata: Kategori silme işlemi başarısız.");
+      }
+      return false; // prevent reload
+    };
+  }
+}
+deleteCategorySaveButton.addEventListener("click", handleDeleteCategorySaveClick);
 
 const handleShowProfileClick = () => {
   const showProfileName = <HTMLDivElement>document.querySelector("#show-profile-name");
