@@ -38,10 +38,13 @@ export class ExpenseService {
             return true;
     }
 
-    public editExpense(expense: Expense, editedExpense: Expense): boolean {
-            let index = this.getExpenses().indexOf(expense);
-            this.expenseListDB[index] = editedExpense;
-            return true;
+    public editExpense(userId: number, id: number, editedName: string, editedAmount: bigint, editedDate: Date, editedCategoryId: number): boolean {
+        let expense = this.getExpenseByUserIdAndExpenseId(userId, id);
+        let index = this.getExpenses().indexOf(expense);
+        let editedExpense = new Expense(userId, id, editedName, editedAmount, editedDate, editedCategoryId);
+        this.expenseListDB[index] = editedExpense;
+        console.log("editedExpense", editedExpense);
+        return true;
     }
 
     public deleteExpense(userId: number, expenseId: number): boolean {
