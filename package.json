@@ -1,7 +1,7 @@
 {
-  "name": "vanilla-typecript-project",
+  "name": "ExamplePersonalAccountingTS",
   "version": "1.0.0",
-  "description": "A template for building html,css and typescript web apps",
+  "description": "An Example Web App about using of HTML, CSS and TypeScript",
   "main": "src/index.ts",
   "scripts": {
     "start": "webpack --watch",
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "node-fetch": "^2.0.0",
     "ts-loader": "^9.2.5",
     "ts-node": "^10.9.1",
     "typescript": "^4.3.5",
@@ -21,17 +22,6 @@
   "devDependencies": {
     "moment": "^2.29.4",
     "@types/jest": "^27.0.1",
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
-    "eslint": "^7.2.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-airbnb-typescript": "^13.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^1.7.0",
     "jest": "^27.0.6",
     "prettier": "^2.3.2",
     "ts-jest": "^27.0.5"
