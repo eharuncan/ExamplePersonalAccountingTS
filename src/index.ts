@@ -3,6 +3,7 @@ import { Database } from "./db/database";
 import { ExpenseCategoryService } from "./services/expenseCategoryService";
 import { UserService } from "./services/userService";
 import { ExpenseService } from "./services/expenseService";
+import { UserTypes } from "./enums/userTypes";
 
 export let expenseCategoryService: ExpenseCategoryService;
 export let userService: UserService;
@@ -95,7 +96,7 @@ function refreshMenus() {
     profileMenu.setAttribute("style", "display: none;");
     logoutMenu.setAttribute("style", "display: none;");
   } else {
-    if(userService.currentUser.type == "ADMIN"){
+    if(userService.currentUser.type == UserTypes.ADMIN){
       usersMenu.setAttribute("style", "display: block;");
     }else{
       expensesMenu.setAttribute("style", "display: block;");
@@ -162,11 +163,10 @@ const handleLoginSaveClick = () => {
       if (userService.login(email, password)) {
         console.log("Oturum açma işlemi başarılı.");
         refreshMenus();
-        handleShowExpensesClick();
-        if(userService.currentUser.type == "CUSTOMER"){
+        if(userService.currentUser.type == UserTypes.CUSTOMER){
           window.location.replace("#show-expenses-page");
           handleShowExpensesClick();
-        }else if (userService.currentUser.type == "ADMIN"){
+        }else if (userService.currentUser.type == UserTypes.ADMIN){
           window.location.replace("#show-users-page");
           handleShowUsersClick();
         }
