@@ -1,4 +1,4 @@
-# PersonalAccountingWeb
+# ExamplePersonalAccountingWeb
 
 which uses HTML, CSS and TypeScript
 
