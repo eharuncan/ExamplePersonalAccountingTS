@@ -1,4 +1,6 @@
-# PersonalAccountingTS
+# PersonalAccountingWeb
+
+which uses HTML, CSS and TypeScript
 
 ## Installing the dependencies
 
