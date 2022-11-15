@@ -1,4 +1,5 @@
 # ExamplePersonalAccountingWeb
+An Example Web App for learning TypeScript
 
 which uses HTML, CSS and TypeScript
 
