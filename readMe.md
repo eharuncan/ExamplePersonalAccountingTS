@@ -9,7 +9,6 @@ In the projects root directory
 
 ```
 npm install
-
 ```
 
 This will install all the dependencies in the package.json
@@ -22,7 +21,6 @@ This will install all the dependencies in the package.json
 cd ./src
 
 npm start
-
 ```
 This will run the start script in the package.json (this runs webpack --watch which will automatically recompile index.ts in the src directory on every change)
 
