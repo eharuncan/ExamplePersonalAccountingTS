@@ -1,5 +1,5 @@
 # example-personal-accounting-web
-An Example Web App for learning TypeScript
+An Example Web App
 
 which uses HTML, CSS and TypeScript
 
