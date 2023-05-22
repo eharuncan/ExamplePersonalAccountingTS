@@ -1,4 +1,4 @@
-# example-personal-accounting-web
+# example-personal-accounting-web-app
 An Example Web App
 
 which uses HTML, CSS and TypeScript
